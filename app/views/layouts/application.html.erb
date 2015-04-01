@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Elunch</title>
+  <title>ELunch</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <header>
+    <%= render 'layouts/navigation' %>
+  </header>
+  <div class="container">
+    <%= yield %>
+    <hr>
+    <footer class="footer">
+      <section class="footer-section footer-links">
+        <div class="footer-links-list">
+          <h3>elunch.com</h3>
+          <ul>
+            <li><a href="#">Home</a></li>
+          </ul>
+        </div>
+      </section>
+      <p>&copy; ELunch, 2015</p>
+    </footer>
+  </div>
 </body>
 </html>
