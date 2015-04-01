@@ -4,6 +4,8 @@ gem 'puma', '~> 2.7.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.beta4'
+# Fix rake migrate error due to activerecord 4.2.0.beta4
+gem 'arel', '6.0.0.beta2'
 # Use postgresql as the database for Active Record
 gem 'pg', '0.18.1'
 # Use SCSS for stylesheets
