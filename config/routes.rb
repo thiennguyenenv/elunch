@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :meals
+
   resources :shifts
 
   root to: 'main#index'
