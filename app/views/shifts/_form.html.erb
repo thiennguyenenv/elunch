@@ -29,14 +29,24 @@
     </div>
     <div class="form-group">
       <%= f.label :start_time, class: "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.time_select :start_time, class: "form-control" %>
+      <div class="col-sm-3">
+        <div class='input-group date' id='dp_start_time'>
+          <%= f.text_field :start_time, class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
     </div>
     <div class="form-group">
       <%= f.label :end_time, class: "col-sm-2 control-label" %>
-      <div class="col-sm-10">
-        <%= f.time_select :end_time, class: "form-control" %>
+      <div class="col-sm-3">
+        <div class='input-group date' id='dp_end_time'>
+          <%= f.text_field :end_time, class: "form-control" %>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-calendar"></span>
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -44,3 +54,13 @@
     <%= f.submit 'Create', class: "btn btn-primary" %>
   </div>
 <% end %>
+<script type="text/javascript">
+  $(function () {
+      $('#dp_start_time').datetimepicker({
+        format: 'LT'
+      });
+      $('#dp_end_time').datetimepicker({
+        format: 'LT'
+      });
+  });
+</script>

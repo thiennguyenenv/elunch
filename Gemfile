@@ -39,6 +39,9 @@ gem 'bootstrap-sass', '~> 3.3.1'
 # Use with Bootstrap to add browser vendor prefixes automatically
 gem 'autoprefixer-rails'
 
+# Bootstrap 3 Timepicker, require dependency: momentjs-rails
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 
 
 # Use ActiveModel has_secure_password
