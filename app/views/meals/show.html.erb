@@ -20,5 +20,17 @@
   <%= @meal.meal_type_id %>
 </p>
 
+<div class="from-group">
+  <ul class="list-inline">
+<% unless @pictures.empty? %>
+  <% @pictures.each do |pic| %>
+    <li class="span3" id="picture_<%= pic.id %>">
+      <%= image_tag pic.image.url, class: "img-thumbnail", style: "width: 140px; height: 140px " %>
+    </li>
+  <% end %>
+<% end %>
+</ul>
+</div>
+
 <%= link_to 'Edit', edit_meal_path(@meal) %> |
 <%= link_to 'Back', meals_path %>

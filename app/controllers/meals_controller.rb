@@ -9,6 +9,7 @@ class MealsController < ApplicationController
   end
 
   def show
+    @pictures = @meal.pictures
     respond_with(@meal)
   end
 
@@ -22,12 +23,25 @@ class MealsController < ApplicationController
 
   def create
     @meal = Meal.new(meal_params)
-    @meal.save
+    if @meal.save
+      if params[:images]
+        params[:images].each do |image|
+          @meal.pictures.create(image: image)
+        end
+      end
+    end
     respond_with(@meal)
   end
 
   def update
-    @meal.update(meal_params)
+    if @meal.update(meal_params)
+      if params[:images]
+        params[:images].each do |image|
+          @meal.pictures.create(image: image)
+        end
+      end
+    end
+
     respond_with(@meal)
   end
 
@@ -42,6 +56,6 @@ class MealsController < ApplicationController
     end
 
     def meal_params
-      params.require(:meal).permit(:name, :description, :rating, :meal_type_id)
+      params.require(:meal).permit(:name, :description, :rating, :meal_type_id, :pictures)
     end
 end
