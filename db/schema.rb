@@ -11,10 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150403092732) do
+ActiveRecord::Schema.define(version: 20150414173019) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "floors", force: true do |t|
+    t.string  "name"
+    t.integer "total"
+  end
 
   create_table "meals", force: true do |t|
     t.string   "name"
@@ -64,6 +69,14 @@ ActiveRecord::Schema.define(version: 20150403092732) do
     t.datetime "confirmation_sent_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.integer  "floor_id"
+    t.string   "what_your_taste"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
