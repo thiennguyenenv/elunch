@@ -46,6 +46,9 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 # File attachment library for ActiveRecord
 gem 'paperclip', '~> 4.2'
 
+# Jcrop
+gem 'jcrop-rails-v2', '~> 0.9.12.3'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
