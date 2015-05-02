@@ -13,7 +13,9 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
       <img id="img_prev" src="#" alt="your image" />
-      <%= f.file_field :avatar, :onchange => "readUrl(this)" %>
+      <span class="btn btn-primary btn-file">
+        Browse <%= f.file_field :avatar, :onchange => "readUrl(this)" %>
+      </span>
       <div><%= f.label :email %><br />
       <%= f.email_field :email, autofocus: true %></div>
 
