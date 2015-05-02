@@ -6,6 +6,6 @@ class ApplicationController < ActionController::Base
 
   private
   def layout
-    devise_controller? ? "subsidy_layout" : "application"
+    devise_controller? && !is_a?(Devise::RegistrationsController) ? "subsidy_layout" : "application"
   end
 end
