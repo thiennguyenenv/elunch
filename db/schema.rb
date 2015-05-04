@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414173019) do
+ActiveRecord::Schema.define(version: 20150504092311) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
 
   create_table "floors", force: true do |t|
     t.string  "name"
@@ -51,6 +52,15 @@ ActiveRecord::Schema.define(version: 20150414173019) do
     t.datetime "end_time"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "tables", force: true do |t|
+    t.integer  "seats"
+    t.integer  "shift_id"
+    t.integer  "available_seats"
+    t.hstore   "cached_users"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "users", force: true do |t|

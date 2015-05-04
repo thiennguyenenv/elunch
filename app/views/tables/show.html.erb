@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Seats:</strong>
+  <%= @table.seats %>
+</p>
+
+<p>
+  <strong>Shift:</strong>
+  <%= @table.shift_id %>
+</p>
+
+<p>
+  <strong>Available seats:</strong>
+  <%= @table.available_seats %>
+</p>
+
+<%= link_to 'Edit', edit_table_path(@table) %> |
+<%= link_to 'Back', tables_path %>
