@@ -4,14 +4,31 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, style: { medium: "300x300>", thumb: "100x100>"},
+  has_attached_file :avatar, style: { medium: "300x300>", thumb: "60x60>"}, :default_url => "/avatar/:style/user.png",
     path: ":rails_root/public/avatar/:id/:filename",
     url: "/avatar/:id/:filename"
 
   # For this: Paperclip::Errors::MissingRequiredValidatorError (Paperclip::Errors::MissingRequiredValidatorError)
   do_not_validate_attachment_file_type :avatar
 
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :reprocess_avatar, :if => :cropping?
+
   def admin?
     false
+  end
+  
+  def cropping?
+    !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+  end
+  
+  def avatar_geometry(style = :original)
+    @geometry ||= {}
+    @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
+  end
+  
+  private
+  def reprocess_avatar
+    avatar.reprocess!
   end
 end
