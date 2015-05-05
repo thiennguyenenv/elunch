@@ -3,6 +3,7 @@
 @import "bootstrap/theme"
 @import "bootstrap-datetimepicker"
 @import "jquery.Jcrop"
+@import "compass"
 
 .navbar-header a
   min-width: 60px
@@ -162,3 +163,52 @@
   width: 50px
   height: 50px
   border-radius: 50%
+
+=put-on-circle($nb-items, $circle-size, $item-size, $class-for-IE: false)
+  $half-item: $item-size / 2
+  $half-parent: $circle-size / 2
+
+  position: relative
+  width: $circle-size
+  height: $circle-size
+  padding: 0
+  border-radius: 50%
+  list-style: none
+  +box-sizing(content-box)
+
+  > *
+    display: block
+    position: absolute
+    top: 50%
+    left: 50%
+    width: $item-size
+    height: $item-size
+    margin: -$half-item
+
+    $angle: 360 / $nb-items
+    $rot: 0
+    @for $i from 1 to $nb-items+1
+      @if $class-for-IE == false
+        &:nth-of-type(#{$i})
+          +transform(rotate(#{$rot}deg) translate($half-parent) rotate(-#{$rot}deg))
+
+      $rot: $rot + $angle
+
+.circle-container
+  +put-on-circle(8, 20em, 6em, false)
+  margin:  5em auto 0
+  border: solid 5px #0099cc
+
+  a
+    display: block
+    border-radius: 50%
+    box-shadow: 0 0 0 5px #d42436
+
+  img
+    display: block
+    width: 100%
+    border-radius: 50%
+    +filter(grayscale(100%))
+
+    &:hover
+      +filter(grayscale(0))
