@@ -8,8 +8,11 @@ gem 'rails', '4.2.0.beta4'
 gem 'arel', '6.0.0.beta2'
 # Use postgresql as the database for Active Record
 gem 'pg', '0.18.1'
-# Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0.0.beta1'
+# Use SCSS for stylesheets. Using sass-rails 5.0.3 has compatible issue with either compass-rails or sprocket
+# Link: https://github.com/sstephenson/sprockets/issues/540
+gem 'sass-rails', '5.0.0.beta1'
+# Use to make writing stylesheets powerful and easy
+gem 'compass-rails', '~> 2.0.1'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -48,6 +51,10 @@ gem 'paperclip', '~> 4.2'
 
 # Jcrop
 gem 'jcrop-rails-v2', '~> 0.9.12.3'
+
+# Solve: rails 4 - wrong number of arguments (2 for 1) - stylesheet_link_tag and javascript_include_tag
+# Link: http://stackoverflow.com/questions/23331172/rails-4-wrong-number-of-arguments-2-for-1-stylesheet-link-tag-and-javascri
+# gem "sprockets", "2.11.0"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
