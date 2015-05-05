@@ -14,10 +14,12 @@ class TablesController < ApplicationController
 
   def new
     @table = Table.new
+    @table.shifts = Shift.all
     respond_with(@table)
   end
 
   def edit
+    @table.shifts = Shift.all
   end
 
   def create
@@ -42,6 +44,6 @@ class TablesController < ApplicationController
     end
 
     def table_params
-      params.require(:table).permit(:seats, :shift_id, :available_seats)
+      params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats)
     end
 end

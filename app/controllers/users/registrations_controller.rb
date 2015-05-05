@@ -24,6 +24,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def choose_table
+    @tables = Table.all
+    render 'choose_table'
+  end
+
   def crop
     @user = User.find(current_user)
     render 'crop'

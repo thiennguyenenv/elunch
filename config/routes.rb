@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     get "users/crop", to: "users/registrations#crop"
+    get "users/choose-table", to: "users/registrations#choose_table"
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
