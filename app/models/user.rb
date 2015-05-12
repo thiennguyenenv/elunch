@@ -4,9 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_attached_file :avatar, style: { medium: "300x300>", thumb: "60x60>"}, :default_url => "/avatar/:style/user.png",
-    path: ":rails_root/public/avatar/:id/:filename",
-    url: "/avatar/:id/:filename"
+  has_attached_file :avatar, styles: { medium: "600x600#", thumb: "60x60#"}, :default_url => "/avatar/:style/user.png",
+    path: ":rails_root/public/avatar/:id/:style_:filename",
+    url: "/avatar/:id/:style_:filename"
 
   # For this: Paperclip::Errors::MissingRequiredValidatorError (Paperclip::Errors::MissingRequiredValidatorError)
   do_not_validate_attachment_file_type :avatar
