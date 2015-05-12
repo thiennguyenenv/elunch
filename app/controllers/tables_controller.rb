@@ -24,7 +24,13 @@ class TablesController < ApplicationController
 
   def create
     @table = Table.new(table_params)
+    @table.cached_seats = {}
+    index = 1
+    while index <= @table.seats do
+      @table.cached_seats[:index] = { first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
+    end
     @table.save
+    
     respond_with(@table)
   end
 
