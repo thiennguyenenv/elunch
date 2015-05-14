@@ -22,6 +22,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jQuery as the JavaScript library
 gem 'jquery-rails', '~> 2.3.0'
+gem 'pjax-rails', '~> 0.1.4'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -39,6 +41,8 @@ gem 'pundit', '~> 0.3.0'
 gem 'ckeditor', '~> 4.1.1'
 
 gem 'bootstrap-sass', '~> 3.3.1'
+
+gem 'font-awesome-rails', '~>4.3.0.0'
 # Use with Bootstrap to add browser vendor prefixes automatically
 gem 'autoprefixer-rails'
 
