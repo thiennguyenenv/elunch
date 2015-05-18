@@ -18,3 +18,6 @@
 //= require bootstrap-datetimepicker
 //= require jquery.Jcrop
 //= require main
+
+// for close button in the notification message
+//= require bootstrap
