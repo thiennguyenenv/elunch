@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :tables
 
-  devise_for :users, controllers: { registrations: "users/registrations" }
+  devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
   resources :meals
 
   resources :shifts
@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/crop", to: "users/registrations#crop"
     get "users/choose-table", to: "users/registrations#choose_table"
+    put "users/join-table", to: "users/registrations#join_table"
+    put "users/leave-table", to: "users/registrations#leave_table"
   end
+
+  get "view-table/:id", to: "tables#view_table"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,0 +1,9 @@
+<div class="outer-circle">
+  <ul class=<%= "circle-container-#{view_table.seats}" %> >
+    <% view_table.cached_seats.each do |user| %>
+      <li>
+        <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
+      </li>
+    <% end %>
+  </ul>
+</div>

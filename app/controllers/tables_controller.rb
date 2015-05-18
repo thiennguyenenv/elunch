@@ -1,5 +1,5 @@
 class TablesController < ApplicationController
-  before_action :set_table, only: [:show, :edit, :update, :destroy]
+  before_action :set_table, only: [:show, :edit, :update, :destroy, :view_table]
 
   respond_to :html
 
@@ -24,13 +24,10 @@ class TablesController < ApplicationController
 
   def create
     @table = Table.new(table_params)
-    @table.cached_seats = {}
-    index = 1
-    while index <= @table.seats do
-      @table.cached_seats[:index] = { first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
+    if @table.init_seats
+      @table.save
     end
-    @table.save
-    
+        
     respond_with(@table)
   end
 
@@ -42,6 +39,11 @@ class TablesController < ApplicationController
   def destroy
     @table.destroy
     respond_with(@table)
+  end
+
+  def view_table
+    sleep(5)
+    render partial: 'view_table', object: @table
   end
 
   private

@@ -29,6 +29,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
     render 'choose_table'
   end
 
+  def join_table
+    @tables = Table.all
+    @table = Table.find(params[:user][:table_id])
+    if @table.add_seat(current_user)
+      current_user.update_without_password(params[:user].permit(:table_id))
+    end
+    render 'main/index'
+  end
+
+  def leave_table
+    @table = Table.find(current_user.table_id)
+    current_user.table_id = nil
+    if @table.empty_seat(current_user.id)
+      current_user.save
+    end
+    render 'main/index'
+  end
+
   def crop
     @user = User.find(current_user)
     render 'crop'
@@ -47,5 +65,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.for(:account_update) do |u|
       u.permit(:first_name, :last_name, :floor_id, :what_your_taste, :email, :current_password, :password, :password_confirmation, :avatar)
     end
+  end
+  def table_params
+    params.require(:user).permit(:first_name, :last_name, :avatar, :current_password, :password, :password_confirmation, :table_id)
   end
 end
