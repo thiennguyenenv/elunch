@@ -24,7 +24,7 @@
     <%= f.number_field :seats %>
   </div>
   <div class="field">
-    <%= f.label :shift_id %><br>
+    <%= f.label :shift %><br>
     <%= f.select :shift_id, @table.shifts.all.collect {|s| [ s.name, s.id ] } %>
   </div>
   <div class="field">

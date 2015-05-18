@@ -1,17 +1,14 @@
-
-choose_table.html.erb
-<p><%= @tables[0].name %></p>
-<p><%= current_user.email %></p>
-<p><%= current_user.first_name %></p>
-<p><%= current_user.last_name %></p>
-<ul class='circle-container'>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/city'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/nature'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/abstract'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/cats'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/food'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/animals'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/business'></a></li>
-  <li><a href='#'><img src='http://lorempixel.com/100/100/people'></a></li>
-  <li class="center"><a href='#'><img src='http://lorempixel.com/100/100/city'></a></li>
-</ul>
+<%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
+  <div class="field">
+    <%= f.label :table %>
+    <%= f.select :table_id, @tables.all.collect { |t| [t.name, t.id] } %>
+  </div>
+  <div>
+    <div id="spinner" class="spinner" style="display:none;">
+      <%= image_tag("spinner.gif") %>
+    </div>
+    <div id="table-detail">
+    </div>
+  </div>
+  <%= f.submit 'Join', class: "btn btn-primary", disabled: !current_user.table_id.nil? %>
+<% end %>
