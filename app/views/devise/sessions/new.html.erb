@@ -11,18 +11,26 @@
 
   <div class="signin-form">
     <%= render 'flashes' %>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-      <div><%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true %></div>
-
-      <div><%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "off" %></div>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'panel form-horizontal' }) do |f| %>
+      <div class="form-group w-icon">
+        <%= f.email_field :email, autofocus: true, class: "form-control input-lg", placeholder: "Enter email address" %>
+        <span class="fa fa-user signin-form-icon"></span>
+      </div>
+      <div class="form-group w-icon">
+        <%= f.password_field :password, autocomplete: "off", class: "form-control input-lg", placeholder: "Enter password" %>
+        <span class="fa fa-lock signin-form-icon"></span>
+      </div>
 
       <% if devise_mapping.rememberable? -%>
-        <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+        <div><%= f.check_box :remember_me %> <%= f.label :remember_me, class: "remember-me" %></div>
       <% end -%>
 
-      <div><%= f.submit "Log in" %></div>
+      <div>
+        <%= f.submit "Log in", class: "signin-btn bg-primary" %>
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Forgot your password?", new_password_path(resource_name), class: "forgot-password" %><br />
+        <% end -%>
+      </div>
     <% end %>
 
     <%= render "devise/shared/links" %>
