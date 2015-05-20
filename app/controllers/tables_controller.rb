@@ -46,6 +46,12 @@ class TablesController < ApplicationController
     render partial: 'view_table', object: @table
   end
 
+  def list_tables
+    sleep(5)
+    @tables = Table.where(shift_id: params[:shift_id])
+    render partial: 'list_tables', object: @tables
+  end
+
   private
     def set_table
       @table = Table.find(params[:id])

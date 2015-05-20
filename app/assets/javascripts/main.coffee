@@ -11,3 +11,12 @@ $ ->
       dataType: 'html'
       success: (data) ->
         $("#table-detail").html(data)
+
+  @loadTable = (source) ->
+    shiftId = $(source).data('shift')
+    $.ajax
+      url: '/list-tables/' + shiftId
+      type: 'GET'
+      dataType: 'html'
+      success: (data) ->
+        $("#tables-panel").html(data)

@@ -1,9 +1,25 @@
 <%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
+  <div class="col-sm-4">
+    <div class="panel panel-info panel-dark widget-profile">
+      <div class="panel-heading">
+        <div class="btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
+          <% @shifts.each do |shift| %>
+            <label class="btn btn-success" onclick="loadTable(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
+              <input type="radio" name="shifts" />
+              <%= shift.name %>
+            </label>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel-body" id="tables-panel">
+      </div>
+    </div>
+  </div>
   <div class="field">
     <%= f.label :table %>
     <%= f.select :table_id, @tables.all.collect { |t| [t.name, t.id] } %>
   </div>
-  <div>
+  <div class="col-sm-6">
     <div id="spinner" class="spinner" style="display:none;">
       <%= image_tag("spinner.gif") %>
     </div>

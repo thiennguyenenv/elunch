@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   end
 
   get "view-table/:id", to: "tables#view_table"
+  get "list-tables/:shift_id", to: "tables#list_tables"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
