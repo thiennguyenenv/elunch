@@ -1,12 +1,15 @@
 $ ->
   $(document).ajaxSend ->
-      $('#spinner').show()
+      $('#spinner').addClass('in')
     $(document).ajaxStop ->
-      $('#spinner').hide()
+      $('#spinner').removeClass('in')
 
-  $('#user_table_id').change ->
+  @viewTable = (source) ->
+    $(source).siblings().removeClass('active')
+    $(source).addClass('active')
+
     $.ajax
-      url: '/view-table/' + $('#user_table_id').val()
+      url: '/view-table/' + $(source).data('table')
       type: 'GET'
       dataType: 'html'
       success: (data) ->

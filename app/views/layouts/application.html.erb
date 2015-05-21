@@ -12,6 +12,9 @@
     <%= render 'layouts/navigation' %>
   </header>
   <div class="container">
+    <div id="spinner" class="spinner fade">
+      <%= image_tag("spinner.gif") %>
+    </div>
     <%= yield %>
     <hr>
     <footer class="footer">
