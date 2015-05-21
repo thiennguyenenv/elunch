@@ -1,6 +1,8 @@
 class Table < ActiveRecord::Base
   attr_accessor :shifts
 
+  has_many :users
+
   serialize :cached_seats
 
   DEFAULT_SEAT = { id: "-1", first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
@@ -10,7 +12,7 @@ class Table < ActiveRecord::Base
     self.cached_seats = Array.new
     index = 1
     while index <= self.seats do
-      self.cached_seats.push(DEFAULT_SEAT)
+      self.cached_seats.push(DEFAULT_SEAT.clone)
       index += 1
     end
     return true
@@ -42,5 +44,16 @@ class Table < ActiveRecord::Base
       index += 1
     end
     return false
+  end
+
+  def update_cached_seats(user)
+    index = 0
+    self.cached_seats.each do |seat|
+      if seat[:id].to_i == user.id
+        self.cached_seats[index] = { first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
+        return self.save
+      end
+      index += 1
+    end
   end
 end

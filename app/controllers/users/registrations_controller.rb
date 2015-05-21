@@ -18,6 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     if successfully_updated
+      @user.table.update_cached_seats(@user)
       redirect_to after_update_path_for(@user)
     else
       render 'edit'
@@ -31,7 +32,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def join_table
-    @tables = Table.all
     @table = Table.find(params[:user][:table_id])
     if @table.add_seat(current_user)
       current_user.update_without_password(params[:user].permit(:table_id))
