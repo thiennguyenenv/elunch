@@ -1,7 +1,7 @@
-<div class="list-group">
+<div id="tables-list" class="list-group">
   <% list_tables.each do |table| %>
     <a href="#" class="list-group-item" onclick="viewTable(this)" data-table="<%= table.id %>">
-      <span class="badge"><%= table.available_seats %></span>
+      <span class="badge">Available: <%= table.available_seats %></span>
       <%= table.name %>
     </a>
   <% end %>

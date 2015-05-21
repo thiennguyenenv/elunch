@@ -42,12 +42,12 @@ class TablesController < ApplicationController
   end
 
   def view_table
-    sleep(5)
+    sleep(2)
     render partial: 'view_table', object: @table
   end
 
   def list_tables
-    sleep(5)
+    sleep(2)
     @tables = Table.where(shift_id: params[:shift_id])
     render partial: 'list_tables', object: @tables
   end

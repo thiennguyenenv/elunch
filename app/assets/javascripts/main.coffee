@@ -7,9 +7,11 @@ $ ->
   @viewTable = (source) ->
     $(source).siblings().removeClass('active')
     $(source).addClass('active')
-
+    $("#table-detail").empty()
+    tableId = $(source).data('table')
+    $("#user_table_id").val(tableId)
     $.ajax
-      url: '/view-table/' + $(source).data('table')
+      url: '/view-table/' + tableId
       type: 'GET'
       dataType: 'html'
       success: (data) ->
