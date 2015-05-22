@@ -1,11 +1,22 @@
 <% if user_signed_in? %>
-  <li><%= link_to 'Edit account', edit_user_registration_path %></li>
-  <li><%= link_to 'Choose table', users_choose_table_path %></li>
-  <li><%= link_to 'Leave table', users_leave_table_path, :method => 'put', data: { confirm: "Are you sure?" } %></li>
-  <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+  <li class="dropdown placeholder">
+    <a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
+        <%= image_tag current_user.try(:avatar).url(:thumb) %>
+        <span><%= "#{current_user.first_name} #{current_user.last_name}" %></span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><%= link_to "My Account", edit_user_registration_path %></li>
+      <li><%= link_to 'Choose table', users_choose_table_path %></li>
+      <li><%= link_to 'Leave table', users_leave_table_path, :method => 'put', data: { confirm: "Are you sure?" } %></li>
+      <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+    </ul>
+  </li>
 <% else %>
-  <li><%= link_to 'Sign in', new_user_session_path %></li>
-  <li><%= link_to 'Sign up', new_user_registration_path %></li>
+  <li class="placeholder">
+    <%= image_tag("/avatar/thumb/user.png") %>
+    <span><%= link_to 'Log in', new_user_session_path %></span> or 
+    <span><%= link_to 'Sign up', new_user_registration_path %></span>
+  </li>
 <% end %>
 <% if user_signed_in? %>
   <% if current_user.admin? %>
