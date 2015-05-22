@@ -27,7 +27,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def choose_table
     @shifts = Shift.all
-    @tables = Table.all
     render 'choose_table'
   end
 

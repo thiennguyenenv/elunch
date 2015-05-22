@@ -1,24 +1,16 @@
-<%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
-  <div class="col-sm-3">
-    <div class="panel panel-info panel-dark widget-profile">
-      <div class="panel-heading">
-        <div id="shifts-list" class="btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
-          <% @shifts.each do |shift| %>
-            <label class="btn btn-success" onclick="loadTable(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
-              <input type="radio" name="shifts" />
-              <%= shift.name %>
-            </label>
-          <% end %>
-        </div>
-      </div>
-      <div class="panel-body-table" id="tables-panel">
+<div class="col-md-12">
+  <div class="panel panel-info panel-dark widget-profile">
+    <div class="panel-heading">
+      <div id="shifts-list" class="btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
+        <% @shifts.each do |shift| %>
+          <label class="btn btn-success" onclick="loadTable(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
+            <input type="radio" name="shifts" />
+            <%= shift.name %>
+          </label>
+        <% end %>
       </div>
     </div>
-  </div>
-  <div class="col-sm-6">
-    <div id="table-detail">
+    <div class="panel-body-table" id="tables-panel">
     </div>
   </div>
-  <%= f.hidden_field :table_id %>
-  <%= f.submit 'Join', class: "btn btn-primary", disabled: !current_user.table_id.nil? %>
-<% end %>
+</div>

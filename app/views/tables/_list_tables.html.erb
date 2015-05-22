@@ -1,8 +1,12 @@
-<div id="tables-list" class="list-group">
-  <% list_tables.each do |table| %>
-    <a href="#" class="list-group-item" onclick="viewTable(this)" data-table="<%= table.id %>">
-      <span class="badge">Available: <%= table.available_seats %></span>
-      <%= table.name %>
-    </a>
-  <% end %>
+<div id="tables-list" class="list-group" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <% list_tables.each do |table| %>
+      <a href="<%= "#table-#{table.id}" %>" class="list-group-item" onclick="viewTable(this)" data-table="<%= table.id %>" data-toggle="collapse" data-parent="#tables-list" data-target="<%= "#table-#{table.id}" %>" aria-expanded="true" aria-controls="<%= "table-#{table.id}" %>" >
+        <span class="badge">Available: <%= "#{table.available_seats} / #{table.seats}" %></span>
+        <%= table.name %>
+      </a>
+      <div id= "<%= "table-#{table.id}" %>" class="panel-collapse collapse" role="tabpanel">
+      </div>
+    <% end %>
+  </div>
 </div>

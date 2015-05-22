@@ -7,3 +7,7 @@
     <% end %>
   </ul>
 </div>
+<%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
+    <%= f.hidden_field :table_id, value: view_table.id %>
+  <%= f.submit 'Join', class: "btn btn-primary", disabled: !current_user.table_id.nil? %>
+<% end %>

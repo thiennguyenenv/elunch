@@ -2,6 +2,7 @@ class Table < ActiveRecord::Base
   attr_accessor :shifts
 
   has_many :users
+  default_scope { order('id ASC') }
 
   serialize :cached_seats
 
