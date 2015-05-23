@@ -18,7 +18,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     if successfully_updated
-      @user.table.update_cached_seats(@user)
+      @user.table.update_cached_seats(@user) unless @user.table.nil?
       redirect_to after_update_path_for(@user)
     else
       render 'edit'
