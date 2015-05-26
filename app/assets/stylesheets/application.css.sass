@@ -21,13 +21,6 @@
   font-size: 13px
   letter-spacing: 1px
 
-.navbar .navbar-nav
-  display: inline-block
-  float: none
-
-.navbar .navbar-collapse
-  text-align: center
-
 .navbar-white
   background-color: #fff
   boder-color: #e7e7e7
@@ -92,6 +85,7 @@
 #background
   height: 100%
   width: 100%
+  background-color: #dddddd
   left: 0
   top: 0
   overflow: hidden
@@ -357,3 +351,33 @@
 .placeholder a
   color: #666
   text-decoration: none
+
+.placeholder .dropdown-menu
+  background: #fff
+  padding: 5px 0
+
+.dropdown .open a
+  margin: 0
+  border-top: none
+  background-color: #f6f6f6
+  color: #555
+
+@media (max-width: 768px)
+  .dropdown>a:after
+    content: "\f078"
+    font-family: FontAwesome
+    float: right
+    display: inline-block
+    font-size: 10
+    position: relative
+
+  .dropdown.open>a:after
+    content: "\f077"
+
+#main-navbar li a
+  line-height: 42px
+  padding-top: 0
+  padding-bottom: 0
+
+.navbar li+li
+  border-top: 1px solid #f1f1f1
