@@ -20,13 +20,13 @@
             <th class="col-md-12 col-xs-12">Name</th>
           </tr>
         </thead> 
-        <tbody>
+        <tbody class="valign-middle">
           <% view_table.cached_seats.each_with_index do |user, index| %>
             <tr>
               <td><%= index + 1 %></td>
               <td>
                 <img src="<%= user[:avatar_url] %>"/>
-                <span
+                <span>
                   <%= user[:first_name] + " " + user[:last_name] %>
                 </span>
               </td>
