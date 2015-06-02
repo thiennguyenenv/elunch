@@ -192,7 +192,7 @@
   padding: 7em
   background-color: #80d04b
   box-shadow: inset 0 0 0 0 rgba(200,95,66, 0.4), inset 0 0 0 5em rgba(255,255,255,0.6), 0 1px 2px rgba(0,0,0,0.1)
-  margin: 10px
+  margin: 10px 20px
   +box-sizing(content-box)
 
 =circle-link-image
@@ -364,6 +364,10 @@
     padding-left: 20px
     padding-right: 20px
 
+  .outer-circle
+    margin: 10px
+    left: 15%
+
 #main-navbar li a
   line-height: 42px
   padding-top: 0
@@ -423,7 +427,7 @@ html, body
 
 .container
   width:auto
-  max-width: 680px
+  max-width: 100%
   padding: 0 15px
 
 #push
@@ -443,3 +447,25 @@ html, body
 #footer .container
   width: auto
   padding: 0 15px
+
+.panel-seat
+  margin: 10px 5px
+  border-color: #39393d
+  border-radius: 2px
+
+.panel-seat > .panel-heading
+  color: #fff
+  background-color: #39393d
+  border-color: #39393d
+  border-top-left-radius: .9px
+  border-top-right-radius: .9px
+  border-bottom-left-radius: 0px
+  border-bottom-right-radius: 0px
+
+.panel-seat img
+  border-radius: 50%
+  width: 4em
+  height: auto
+
+.table tbody>tr>th, .table tfoot>tr>th, .table thead>tr>th
+  font-weight: 600
