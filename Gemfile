@@ -69,6 +69,8 @@ gem 'jcrop-rails-v2', '~> 0.9.12.3'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'figaro', '~> 1.0.0.rc1'
+
 group :development, :test do
   gem 'pry', '~> 0.10.1'
 
