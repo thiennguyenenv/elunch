@@ -71,6 +71,8 @@ gem 'jcrop-rails-v2', '~> 0.9.12.3'
 
 gem 'figaro', '~> 1.0.0.rc1'
 
+gem 'aws-sdk', '~> 1.5.8'
+
 group :development, :test do
   gem 'pry', '~> 0.10.1'
 
