@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610022539) do
+ActiveRecord::Schema.define(version: 20150610072758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,11 +59,17 @@ ActiveRecord::Schema.define(version: 20150610022539) do
     t.integer  "shift_id"
     t.integer  "available_seats"
     t.hstore   "cached_users"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.text     "name"
     t.text     "description"
     t.text     "cached_seats"
+    t.boolean  "for_vegans",      default: false
+  end
+
+  create_table "tables_users", id: false, force: true do |t|
+    t.integer "table_id"
+    t.integer "user_id"
   end
 
   create_table "users", force: true do |t|
@@ -90,8 +96,8 @@ ActiveRecord::Schema.define(version: 20150610022539) do
     t.string   "last_name"
     t.integer  "floor_id"
     t.string   "what_your_taste"
-    t.integer  "table_id"
     t.boolean  "admin",                  default: false
+    t.boolean  "want_vegan_meal",        default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
