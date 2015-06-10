@@ -11,12 +11,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     get "users/crop", to: "users/registrations#crop"
     get "users/choose-table", to: "users/registrations#choose_table"
+    get "users/choose-vegan-table", to: "users/registrations#choose_vegan_table"
     put "users/join-table", to: "users/registrations#join_table"
     put "users/leave-table", to: "users/registrations#leave_table"
   end
 
   get "view-table/:id", to: "tables#view_table"
   get "list-tables/:shift_id", to: "tables#list_tables"
+  get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

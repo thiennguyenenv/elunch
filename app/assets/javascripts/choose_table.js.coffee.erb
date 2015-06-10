@@ -1,12 +1,13 @@
 $ ->
   @loadTable = (source) ->
-      shiftId = $(source).data('shift')
-      $.ajax
-        url: '/list-tables/' + shiftId
-        type: 'GET'
-        dataType: 'html'
-        success: (data) ->
-          $("#tables-panel").html(data)
+    shiftId = $(source).data('shift')
+    targetUrl = if $(source).data('vegan') == true then '/list-vegan-tables/' else '/list-tables/'
+    $.ajax
+      url: targetUrl + shiftId
+      type: 'GET'
+      dataType: 'html'
+      success: (data) ->
+        $("#tables-panel").html(data)
 
   $(document).on "ready page:load", ->
     $("#shifts-list label:first").click()

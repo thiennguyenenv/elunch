@@ -3,7 +3,7 @@
     <div class="panel-heading">
       <div id="shifts-list" class="btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
         <% @shifts.each do |shift| %>
-          <label class="btn btn-success" onclick="loadTable(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
+          <label class="btn btn-success" onclick="loadTable(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>" data-vegan="<%= @vegan %>">
             <input type="radio" name="shifts" />
             <%= shift.name %>
           </label>

@@ -11,14 +11,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     @user = User.find(current_user)
     successfully_updated = if need_password?(params)
-      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :current_password, :password, :password_confirmation))
+      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation))
     else
       params[:user].delete(:current_password)
-      @user.update_without_password(params[:user].permit(:first_name, :last_name, :avatar))
+      @user.update_without_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal))
     end
 
     if successfully_updated
-      @user.table.update_cached_seats(@user) unless @user.table.nil?
+      unless @user.tables.count == 0
+        @user.tables.each do |table|
+          table.update_cached_seats(@user)
+        end
+      end
       redirect_to after_update_path_for(@user)
     else
       render 'edit'
@@ -27,6 +31,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def choose_table
     @shifts = Shift.all
+    render 'choose_table'
+  end
+
+  def choose_vegan_table
+    @shifts = Shift.all
+    @vegan = true
     render 'choose_table'
   end
 

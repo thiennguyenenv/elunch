@@ -42,13 +42,16 @@ class TablesController < ApplicationController
   end
 
   def view_table
-    sleep(2)
     render partial: 'view_table', object: @table
   end
 
   def list_tables
-    sleep(2)
-    @tables = Table.where(shift_id: params[:shift_id])
+    @tables = Table.where(shift_id: params[:shift_id], for_vegans: false)
+    render partial: 'list_tables', object: @tables
+  end
+
+  def list_vegan_tables
+    @tables = Table.where(shift_id: params[:shift_id], for_vegans: true)
     render partial: 'list_tables', object: @tables
   end
 
@@ -58,6 +61,6 @@ class TablesController < ApplicationController
     end
 
     def table_params
-      params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats)
+      params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats, :for_vegans)
     end
 end

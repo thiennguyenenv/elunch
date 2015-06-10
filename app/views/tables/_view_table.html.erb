@@ -1,3 +1,4 @@
+<p><%= current_user.tables.to_json %> </p>
 <div class="row">
   <div class="outer-circle col-md-4">
     <ul class=<%= "circle-container-#{view_table.seats}" %> >
@@ -37,7 +38,7 @@
       <div class="panel-footer text-right">
         <%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
           <%= f.hidden_field :table_id, value: view_table.id %>
-          <%= f.submit 'Join', class: "btn btn-primary", disabled: !current_user.table_id.nil? %>
+          <%= f.submit 'Join', class: "btn btn-primary" %>
         <% end %>
       </div>
     </div>
