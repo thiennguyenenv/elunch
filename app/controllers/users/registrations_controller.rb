@@ -41,18 +41,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def join_table
-    @table = Table.find(params[:user][:table_id])
-    if @table.add_seat(current_user)
-      current_user.update_without_password(params[:user].permit(:table_id))
+    table = Table.find(params[:user][:table_id])
+    if table.add_seat(current_user)
+      current_user.tables << table
+      current_user.save
     end
     render 'main/index'
   end
 
   def leave_table
-    @table = Table.find(current_user.table_id)
-    current_user.table_id = nil
-    if @table.empty_seat(current_user.id)
-      current_user.save
+    leave_table = current_user.tables.find(params[:user][:table_id])
+    if leave_table.present? and leave_table.empty_seat(current_user.id)
+      current_user.tables.delete(leave_table)
     end
     render 'main/index'
   end

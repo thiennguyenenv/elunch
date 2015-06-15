@@ -10,7 +10,6 @@
       <% if current_user.try('want_vegan_meal?') %>
         <li><%= link_to 'Choose vegan table', users_choose_vegan_table_path %></li>
       <% end %>
-      <li><%= link_to 'Leave table', users_leave_table_path, :method => 'put', data: { confirm: "Are you sure?" } %></li>
       <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
     </ul>
   </li>

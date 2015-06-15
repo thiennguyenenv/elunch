@@ -1,15 +1,16 @@
-<p><%= current_user.tables.to_json %> </p>
 <div class="row">
-  <div class="outer-circle col-md-4">
-    <ul class=<%= "circle-container-#{view_table.seats}" %> >
-      <% view_table.cached_seats.each do |user| %>
-        <li>
-          <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
-        </li>
-      <% end %>
-    </ul>
+  <div class="col-md-4">
+    <div class="outer-circle">
+      <ul class=<%= "circle-container-#{view_table.seats}" %> >
+        <% view_table.cached_seats.each do |user| %>
+          <li>
+            <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
+          </li>
+        <% end %>
+      </ul>
+    </div>
   </div>
-  <div class="col-md-7">
+  <div class="col-md-4">
     <div class="panel panel-seat form-horizontal">
       <div class="panel-heading">
         <span class="panel-title">Seats Information</span>
