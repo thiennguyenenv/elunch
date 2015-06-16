@@ -25,6 +25,18 @@ class User < ActiveRecord::Base
     @geometry[style] ||= Paperclip::Geometry.from_file(avatar.path(style))
   end
 
+  def is_set_avatar?
+    return self.progress_status[0] == 1
+  end
+
+  def is_choose_normal_table?
+    return self.progress_status[1] == 1
+  end
+
+  def is_choose_vegan_table?
+    return (self.progress_status[2] == 1 && self.want_vegan_meal?) || !self.want_vegan_meal?
+  end
+
   private
   def reprocess_avatar
     avatar.reprocess!

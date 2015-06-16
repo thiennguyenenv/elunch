@@ -4,17 +4,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
-  # def create
-  #   super
-  # end
+  def create
+    # set flag to mark that avatar set up
+    if params[:user][:avatar].present?
+      params[:user][:progress_status] = 0b00000001
+    end
+    super
+  end
 
   def update
     @user = User.find(current_user)
+    params[:user][:progress_status] |= 0b00000001 if params[:user][:avatar].present?
     successfully_updated = if need_password?(params)
-      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation))
+      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation), :progress_status)
     else
       params[:user].delete(:current_password)
-      @user.update_without_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal))
+      @user.update_without_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :progress_status))
     end
 
     if successfully_updated
@@ -43,6 +48,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def join_table
     table = Table.find(params[:user][:table_id])
     if table.add_seat(current_user)
+      if table.for_vegans
+        current_user.progress_status |= 0b00000100
+      else
+        current_user.progress_status |= 0b00000010
+      end
       current_user.tables << table
       current_user.save
     end
@@ -51,8 +61,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def leave_table
     leave_table = current_user.tables.find(params[:user][:table_id])
-    if leave_table.present? and leave_table.empty_seat(current_user.id)
+    if leave_table.present? && leave_table.empty_seat(current_user.id)
       current_user.tables.delete(leave_table)
+      if leave_table.for_vegans?
+        current_user.progress_status ^= 0b00000100
+      else
+        current_user.progress_status ^= 0b00000010
+      end
+      current_user.save!
     end
     render 'main/index'
   end
@@ -70,10 +86,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   protected
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
-      u.permit(:first_name, :last_name, :floor_id, :what_your_taste, :email, :current_password, :password, :password_confirmation, :avatar)
+      u.permit(:first_name, :last_name, :floor_id, :what_your_taste, :email, :current_password, :password, :password_confirmation, :avatar, :progress_status)
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:first_name, :last_name, :floor_id, :what_your_taste, :email, :current_password, :password, :password_confirmation, :avatar)
+      u.permit(:first_name, :last_name, :floor_id, :what_your_taste, :email, :current_password, :password, :password_confirmation, :avatar, :progress_status)
     end
   end
   def table_params
