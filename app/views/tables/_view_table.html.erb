@@ -39,7 +39,7 @@
       <div class="panel-footer text-right">
         <%= form_for current_user, url: users_join_table_path, method: :put do |f| %>
           <%= f.hidden_field :table_id, value: view_table.id %>
-          <%= f.submit 'Join', class: "btn btn-primary" %>
+          <%= f.submit 'Join', class: "btn btn-primary", disabled: (view_table.for_vegans && current_user.is_choose_vegan_table?) || (!view_table.for_vegans && current_user.is_choose_normal_table?) %>
         <% end %>
       </div>
     </div>

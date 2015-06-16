@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_filter :confirm_logged_in, only: [:choose_table, :choose_vegan_table, :leave_table, :destroy]
   before_filter :configure_permitted_parameters
   # def new
   #   super

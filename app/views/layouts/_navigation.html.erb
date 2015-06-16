@@ -20,9 +20,14 @@
       <ul class="nav navbar-nav">
         <li><%= link_to "About", root_path %></li>
         <li><%= link_to "News", root_path %></li>
-        <li><%= link_to "Shifts", shifts_path %></li>
-        <li><%= link_to "Meals", meals_path %></li>
-        <li><%= link_to "Tables", tables_path %></li>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li><%= link_to "Shifts", shifts_path %></li>
+            <li><%= link_to "Meals", meals_path %></li>
+            <li><%= link_to "Tables", tables_path %></li>
+            <li><%= link_to 'Users', edit_user_registration_path %></li>
+          <% end %>
+        <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

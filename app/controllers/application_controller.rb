@@ -8,4 +8,15 @@ class ApplicationController < ActionController::Base
   def layout
     devise_controller? && !is_a?(Devise::RegistrationsController) ? "subsidy_layout" : "application"
   end
+
+  protected
+  def confirm_logged_in
+    unless user_signed_in?
+      flash[:notice] = "Please log in"
+      redirect_to :root
+      return false
+    else
+      return true
+    end
+  end
 end
