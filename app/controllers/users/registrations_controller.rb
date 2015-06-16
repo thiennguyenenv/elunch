@@ -12,8 +12,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def destroy
+    if current_user.tables.count > 0
+      flash.now.alert = 'Cannot cancel your account. You need to leave all your tables first and try again.'
+      return render 'edit'
+    else
+      super
+    end
+  end
+
   def update
     @user = User.find(current_user)
+    if params[:user][:want_vegan_meal] == "0" && current_user.progress_status[2] == 1
+      flash.now.alert = 'You need to leave your vegan table first and try again.'
+      return render 'edit'
+    end
     params[:user][:progress_status] |= 0b00000001 if params[:user][:avatar].present?
     successfully_updated = if need_password?(params)
       @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation), :progress_status)

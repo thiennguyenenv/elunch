@@ -87,7 +87,7 @@
     <% if current_user.tables.count > 0 %>
       <% current_user.tables.each do |table| %>
         <div class="row">
-          <%= label_tag table.name, table.name, class: "control-label text-center col-sm-3 col-xs-12" %>
+          <%= label_tag table.name, table.name + (table.for_vegans? ? ' (for vegans)' : ''), class: "control-label text-center col-sm-3 col-xs-12" %>
           <div class="col-md-4 col-xs-12">
             <div class="outer-circle">
               <ul class=<%= "circle-container-#{table.seats}" %> >

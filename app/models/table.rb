@@ -20,6 +20,7 @@ class Table < ActiveRecord::Base
   end
 
   def add_seat(user)
+    return false unless user.id.present?
     if available_seats > 0
       index = 0
       self.cached_seats.each do |seat|
