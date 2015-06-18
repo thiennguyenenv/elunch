@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   resources :tables
 
   devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
+  scope "/admin" do
+    resources :users
+  end
+
   resources :meals
 
   resources :shifts

@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   private
   def determine_layout
-    current_user.admin? ? "admin_layout" : "application"
+    current_user.try(:admin?) ? "admin_layout" : "application"
   end
 
   protected
