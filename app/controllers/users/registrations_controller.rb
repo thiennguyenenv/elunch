@@ -30,7 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
     params[:user][:progress_status] |= 0b00000001 if params[:user][:avatar].present?
     successfully_updated = if need_password?(params)
-      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation), :progress_status)
+      @user.update_with_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation, :progress_status))
     else
       params[:user].delete(:current_password)
       @user.update_without_password(params[:user].permit(:first_name, :last_name, :avatar, :floor_id, :what_your_taste, :want_vegan_meal, :progress_status))
