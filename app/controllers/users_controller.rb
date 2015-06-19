@@ -2,8 +2,24 @@ class UsersController < ApplicationController
   layout :determine_layout
 
   before_action :set_user, only: [:edit, :update, :destroy]
+
+  respond_to :html
+
   def index
     @users = Kaminari.paginate_array(User.all).page(params[:page])
+  end
+
+  def new
+    @user = User.new
+    respond_with(@user)
+  end
+
+  def create
+    @user = User.new(user_params)
+    @user.save
+    respond_with @user do |format|
+      format.html {redirect_to users_path, notice: "Create new user successfully!"}
+    end
   end
 
   def edit
@@ -20,6 +36,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :floor_id, :what_your_taste, :current_password, :password, :password_confirmation, :avatar, :progress_status, :admin)
+    if params[:action] = "create"
+      params.require(:user).permit(:first_name, :last_name, :floor_id, :what_your_taste, :want_vegan_meal, :email, :password, :password_confirmation, :avatar, :progress_status, :admin)
+    else
+      params.require(:user).permit(:first_name, :last_name, :floor_id, :what_your_taste, :want_vegan_meal, :current_password, :password, :password_confirmation, :avatar, :progress_status, :admin)
+    end
   end
 end
