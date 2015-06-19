@@ -71,7 +71,11 @@ gem 'jcrop-rails-v2', '~> 0.9.12.3'
 
 gem 'figaro', '~> 1.0.0.rc1'
 
+# For Paperclipe with Amazon S3
 gem 'aws-sdk', '~> 1.5.8'
+
+# Clean, powerful, customizable and sophisticated paginator for ORMs
+gem 'kaminari', '~> 0.16.3'
 
 group :development, :test do
   gem 'pry', '~> 0.10.1'

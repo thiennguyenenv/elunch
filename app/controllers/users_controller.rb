@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [:edit, :update, :destroy]
   def index
-    @users = User.all
+    @users = Kaminari.paginate_array(User.all).page(params[:page])
   end
 
   def edit
