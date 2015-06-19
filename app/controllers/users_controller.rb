@@ -16,9 +16,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    @user.save
     respond_with @user do |format|
-      format.html {redirect_to users_path, notice: "Create new user successfully!"}
+      if @user.save
+        format.html {redirect_to users_path, notice: "Create new user successfully!"}
+      else
+        format.html {redirect_to new_user_path, alert: @user.errors}
+      end
     end
   end
 

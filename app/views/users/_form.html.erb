@@ -4,6 +4,7 @@
   </div>
   <div class="content">
     <%= form_for(@user, html: {class: 'form-horizontal' }) do |f| %>
+      <%= error_messages(@user) %>
       <div class="form-group">
         <label class="col-sm-3 control-label">Avatar</label>
         <div class="col-sm-9">
