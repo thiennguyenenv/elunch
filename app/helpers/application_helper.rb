@@ -36,8 +36,9 @@ module ApplicationHelper
                       resource: object.class.model_name.human.downcase)
 
     html = <<-HTML
-    <div class id="error_explaination">
-      <h2>#{sentence}</h2>
+    <div class="alert alert-alert">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <h4>#{sentence}</h4>
       <ul>#{messages}</ul>
     </div>
     HTML

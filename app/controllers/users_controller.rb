@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       if @user.save
         format.html {redirect_to users_path, notice: "Create new user successfully!"}
       else
-        format.html {redirect_to new_user_path, alert: @user.errors}
+        format.html {render :new}
       end
     end
   end
