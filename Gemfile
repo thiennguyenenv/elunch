@@ -49,6 +49,7 @@ gem 'autoprefixer-rails'
 # Bootstrap 3 Timepicker, require dependency: momentjs-rails
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
+gem 'bootstrap-select-rails', '~> 1.6.3'
 
 # File attachment library for ActiveRecord
 gem 'paperclip', '~> 4.2'

@@ -1,41 +1,60 @@
-<%= form_for(@table) do |f| %>
-  <% if @table.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@table.errors.count, "error") %> prohibited this table from being saved:</h2>
-
-      <ul>
-      <% @table.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+<div class="panel-flat">
+  <div class="header">
+    <h3><%= @table.new_record? ? "Create Table" : "Update Table" %></h3>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+  <div class="content">
+    <%= form_for(@table, html: {class: "form-horizontal"}) do |f| %>
+      <%= error_messages(@table) %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%=  f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :seats, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.number_field :seats, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :shift, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.select :shift_id, @table.shifts.all.collect {|s| [ s.name, s.id ] }, {}, {class: "selectpicker"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :available_seats, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.number_field :available_seats, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :for_vegans, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.check_box :for_vegans %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <% if @table.new_record? %>
+            <%= f.submit "Create", class: "btn btn-success" %>
+          <% else %>
+            <%= f.submit "Update", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :seats %><br>
-    <%= f.number_field :seats %>
-  </div>
-  <div class="field">
-    <%= f.label :shift %><br>
-    <%= f.select :shift_id, @table.shifts.all.collect {|s| [ s.name, s.id ] } %>
-  </div>
-  <div class="field">
-    <%= f.label :available_seats %><br>
-    <%= f.number_field :available_seats %>
-  </div>
-  <div class="field">
-    <%= f.label :for_vegans %>
-    <%= f.check_box :for_vegans %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $(".selectpicker").selectpicker({style: 'btn-info', size: 4});
+  });
+</script>

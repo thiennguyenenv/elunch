@@ -5,7 +5,7 @@ class TablesController < ApplicationController
   respond_to :html
 
   def index
-    @tables = Table.all
+    @tables = Kaminari.paginate_array(Table.all).page(params[:page])
     respond_with(@tables)
   end
 
@@ -15,12 +15,10 @@ class TablesController < ApplicationController
 
   def new
     @table = Table.new
-    @table.shifts = Shift.all
     respond_with(@table)
   end
 
   def edit
-    @table.shifts = Shift.all
   end
 
   def create
@@ -57,11 +55,11 @@ class TablesController < ApplicationController
   end
 
   private
-    def set_table
-      @table = Table.find(params[:id])
-    end
+  def set_table
+    @table = Table.find(params[:id])
+  end
 
-    def table_params
-      params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats, :for_vegans)
-    end
+  def table_params
+    params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats, :for_vegans)
+  end
 end

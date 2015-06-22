@@ -1,5 +1,8 @@
 class Table < ActiveRecord::Base
   attr_accessor :shifts
+  validates :name, presence: true
+  validates :seats, numericality: { only_integer: true, greater_than: 0 }
+
 
   has_and_belongs_to_many :users
   default_scope { order('id ASC') }
@@ -12,7 +15,7 @@ class Table < ActiveRecord::Base
     self.available_seats = self.seats
     self.cached_seats = Array.new
     index = 1
-    while index <= self.seats do
+    while self.seats.present? && self.seats > 0 && index <= self.seats do
       self.cached_seats.push(DEFAULT_SEAT.clone)
       index += 1
     end
@@ -57,5 +60,9 @@ class Table < ActiveRecord::Base
       end
       index += 1
     end
+  end
+
+  def shifts
+    Shift.all
   end
 end
