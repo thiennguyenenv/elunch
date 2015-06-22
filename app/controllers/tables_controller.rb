@@ -1,4 +1,5 @@
 class TablesController < ApplicationController
+  layout :determine_layout
   before_action :set_table, only: [:show, :edit, :update, :destroy, :view_table]
 
   respond_to :html

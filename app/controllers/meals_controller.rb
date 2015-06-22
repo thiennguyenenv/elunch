@@ -1,10 +1,11 @@
 class MealsController < ApplicationController
+  layout :determine_layout
   before_action :set_meal, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @meals = Meal.all
+    @meals = Kaminari.paginate_array(Meal.all).page(params[:page])
     respond_with(@meals)
   end
 

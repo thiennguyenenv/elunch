@@ -1,10 +1,11 @@
 class ShiftsController < ApplicationController
+  layout :determine_layout
   before_action :set_shift, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
 
   def index
-    @shifts = Shift.all
+    @shifts = Kaminari.paginate_array(Shift.all).page(params[:page])
     respond_with(@shifts)
   end
 
