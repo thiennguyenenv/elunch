@@ -1,1 +1,1 @@
-json.extract! @meal, :id, :name, :description, :rating, :meal_type_id, :created_at, :updated_at
+json.extract! @meal, :id, :meal_date, :preordered_meals, :actual_meals, :extra_meals, :absence_with_notice

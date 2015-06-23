@@ -1,0 +1,36 @@
+<div class="panel-flat">
+  <div class="header">
+    <h3>Dish Detail</h3>
+  </div>
+  <div class="content">
+    <dl class="dl-horizontal">
+      <dt>Name:</dt>
+      <dd><%= @dish.name %></dd>
+      <dt>Description:</dt>
+      <dd><%= @dish.description %></dd>
+      <dt>Rating:</dt>
+      <dd><%= @dish.rating %></dd>
+      <dt>Meal type:</dt>
+      <dd><%= @dish.category_id %></dd>
+    </dl>
+  </div>
+  <div class="header">
+    <h3>Gallery</h3>
+  </div>
+  <div class="content">
+    <div class="from-group">
+      <ul class="list-inline">
+      <% unless @pictures.empty? %>
+        <% @pictures.each do |pic| %>
+          <li class="span3" id="picture_<%= pic.id %>">
+            <%= image_tag pic.image.url, class: "img-thumbnail", style: "width: 140px; height: 140px " %>
+          </li>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_dish_path(@dish) %> |
+<%= link_to 'Back', dishes_path %>

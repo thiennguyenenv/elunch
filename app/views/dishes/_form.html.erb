@@ -1,0 +1,54 @@
+<div class="panel-flat">
+  <div class="header">
+    <h3><%= @dish.new_record? ? "Create Dish" : "Update Dish" %></h3>
+  </div>
+  <div class="content">
+    <%= form_for(@dish, html: { class: 'form-horizontal', multipart: true }) do |f| %>
+      <%= error_messages @dish %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :rating, class: "col-sm-3 control-label" %>
+        <div class=col-sm-9>
+          <%= f.text_field :rating, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :category, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.select :category_id, @dish.categories.all.collect {|c| [c.name, c.id] }, {}, class: "selectpicker" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :pictures, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= file_field_tag "images[]", type: :file, multiple: true %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <% if @dish.new_record? %>
+            <%= f.submit "Create", class: "btn btn-success" %>
+          <% else %>
+            <%= f.submit "Update", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function() {
+    $(".selectpicker").selectpicker({style: "btn-info", size: 4});
+  });
+</script>

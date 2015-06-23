@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :categories
+
   resources :tables
 
   devise_for :users, controllers: { registrations: "users/registrations", sessions: "users/sessions" }
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :meals
-
+  resources :dishes
   resources :shifts
 
   root to: 'main#index'

@@ -1,39 +1,41 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-flat">
+  <div class="header">
+    <h3>Dishes</h3>
+  </div>
+  <div class="content">
+    <div class="row">
+      <%= link_to "New Meal", new_meal_path, class: "btn btn-primary" %>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>Meal Date</th>
+              <th>Preordered Meals</th>
+              <th>Actual Meals</th>
+              <th>Extra Meals</th>
+              <th>Absence With Notice</th>
+              <th colspan="3">Action</th>
+            </tr>
+          </thead>
 
-<div class="table-primary">
-  <div class="table-header">
-    <div class="table-caption">
-      Meals
+          <tbody>
+            <% @meals.each do |meal| %>
+              <tr>
+                <td><%= meal.meal_date %></td>
+                <td><%= meal.preordered_meals %></td>
+                <td><%= meal.actual_meals %></td>
+                <td><%= meal.extra_meals %></td>
+                <td><%= meal.absence_with_notice %></td>
+                <td><%= link_to 'Show', meal %></td>
+                <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
+                <td><%= link_to 'Destroy', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <table class="table table-striped table-bordered table-hover">
-    <thead>
-      <tr>
-        <th>Thumbnail</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Rating</th>
-        <th>Meal type</th>
-        <th colspan="3">Action</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @meals.each do |meal| %>
-        <tr>
-          <td><%= image_tag meal.pictures[0].nil? ? '' : meal.pictures[0].image.url, class: "img-thumbnail", style: "width: 100px; height: 100px;"%></td>
-          <td><%= meal.name %></td>
-          <td><%= meal.description %></td>
-          <td><%= meal.rating %></td>
-          <td><%= meal.meal_type_id %></td>
-          <td><%= link_to 'Show', meal %></td>
-          <td><%= link_to 'Edit', edit_meal_path(meal) %></td>
-          <td><%= link_to 'Destroy', meal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
 </div>
-<br>
-
-<%= link_to 'New Meal', new_meal_path %>
