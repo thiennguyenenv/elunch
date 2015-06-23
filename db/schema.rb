@@ -11,11 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616043654) do
+ActiveRecord::Schema.define(version: 20150623032055) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "categories", force: true do |t|
+    t.string "name"
+    t.string "description"
+  end
+
+  create_table "dishes", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.decimal  "rating"
+    t.integer  "category_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "token"
+  end
 
   create_table "floors", force: true do |t|
     t.string  "name"
@@ -23,13 +38,11 @@ ActiveRecord::Schema.define(version: 20150616043654) do
   end
 
   create_table "meals", force: true do |t|
-    t.string   "name"
-    t.string   "description"
-    t.decimal  "rating"
-    t.integer  "meal_type_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.string   "token"
+    t.datetime "meal_date"
+    t.integer  "preordered_meals"
+    t.integer  "actual_meals"
+    t.integer  "extra_meals"
+    t.integer  "absence_with_notice"
   end
 
   create_table "pictures", force: true do |t|
