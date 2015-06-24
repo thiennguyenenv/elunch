@@ -23,7 +23,7 @@
           <tbody>
             <% @meals.each do |meal| %>
               <tr>
-                <td><%= meal.meal_date %></td>
+                <td><%= meal.meal_date.strftime("%d/%m/%Y") %></td>
                 <td><%= meal.preordered_meals %></td>
                 <td><%= meal.actual_meals %></td>
                 <td><%= meal.extra_meals %></td>

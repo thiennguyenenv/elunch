@@ -22,13 +22,17 @@ class MealsController < ApplicationController
   end
 
   def create
-    @meal = Meal.new(meal_params)
+    new_meal = meal_params
+    new_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], '%m/%d/%Y')
+    @meal = Meal.new(new_meal)
     @meal.save!
     respond_with(@meal)
   end
 
   def update
-    @meal.update(meal_params)
+    update_meal = meal_params
+    update_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], '%m/%d/%Y')
+    @meal.update(update_meal)
     respond_with(@meal)
   end
 
