@@ -37,6 +37,11 @@ class CategoriesController < ApplicationController
     respond_with(@category)
   end
 
+  def list_dishes
+    @dishes =  Dish.where(category_id: params[:id])
+    render partial: 'list_dishes'
+  end
+
   private
   def set_category
     @category = Category.find(params[:id])

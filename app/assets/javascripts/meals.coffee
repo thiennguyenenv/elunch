@@ -1,3 +1,9 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  @loadDishes = (source) ->
+    categoryId = source.value
+    $.ajax
+      url: '/category/' + categoryId + '/dishes'
+      type: 'GET'
+      dataType: 'html'
+      success: (data) ->
+        $('#list_dishes').html(data)

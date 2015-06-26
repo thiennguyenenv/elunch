@@ -15,6 +15,7 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
+    @categories = Category.all
     respond_with(@meal)
   end
 
@@ -25,7 +26,7 @@ class MealsController < ApplicationController
     new_meal = meal_params
     new_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], '%m/%d/%Y')
     @meal = Meal.new(new_meal)
-    @meal.save!
+    @meal.save
     respond_with(@meal)
   end
 

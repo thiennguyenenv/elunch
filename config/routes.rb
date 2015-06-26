@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get "view-table/:id", to: "tables#view_table"
   get "list-tables/:shift_id", to: "tables#list_tables"
   get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
+  get "category/:id/dishes", to: "categories#list_dishes"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
