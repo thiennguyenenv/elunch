@@ -78,6 +78,9 @@ gem 'aws-sdk', '~> 1.5.8'
 # Clean, powerful, customizable and sophisticated paginator for ORMs
 gem 'kaminari', '~> 0.16.3'
 
+# File upload JS
+gem 'dropzonejs-rails', '~> 0.7.1'
+
 group :development, :test do
   gem 'pry', '~> 0.10.1'
 

@@ -24,7 +24,6 @@ class DishesController < ApplicationController
 
   def create
     @dish = Dish.new(dish_params)
-    binding.pry
     if @dish.save
       if params[:images]
         params[:images].each do |image|
