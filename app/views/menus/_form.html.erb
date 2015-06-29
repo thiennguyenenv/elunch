@@ -1,29 +1,46 @@
-<%= form_for(@menu) do |f| %>
-  <% if @menu.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@menu.errors.count, "error") %> prohibited this menu from being saved:</h2>
-
-      <ul>
-      <% @menu.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<div class="panel-flat">
+  <div class="header">
+    <h3><%= @menu.new_record? ? 'Create Menu' : 'Update Menu' %></h3>
+  </div>
+  <div class="content">
+    <%= form_for [@meal, @menu], html: { class: "form-horizontal" } do |f| %>
+      <%= error_messages @menu %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :rating, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.number_field :rating, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <% if @menu.new_record? %>
+            <%= f.submit "Create", class: "btn btn-primary" %>
+          <% else %>
+            <%= f.submit "Update", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <% unless @menu.new_record? %>
+    <div class="header">
+      <h3>Dishes</h3>
+    </div>
+    <div class="content">
+      <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name"), onchange: "loadDishes(this)"%>
+      <div id="list_dishes"></div>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br>
-    <%= f.number_field :rating %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

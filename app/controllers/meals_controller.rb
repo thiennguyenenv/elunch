@@ -15,12 +15,12 @@ class MealsController < ApplicationController
 
   def new
     @meal = Meal.new
-    @categories = Category.all
+    @menus = Menu.all
     respond_with(@meal)
   end
 
   def edit
-    @categories = Category.all
+    @menus = Menu.all
   end
 
   def create
@@ -49,6 +49,6 @@ class MealsController < ApplicationController
   end
 
   def meal_params
-    params.require(:meal).permit(:meal_date, :preordered_meals, :actual_meals, :extra_meals, :absence_with_notice)
+    params.require(:meal).permit(:meal_date, :preordered_meals, :actual_meals, :extra_meals, :absence_with_notice, :menu_id)
   end
 end
