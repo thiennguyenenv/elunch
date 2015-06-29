@@ -10,7 +10,14 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :meals
+  resources :meals do
+    resources :menus
+  end
+
+  resources :menus do
+    resources :dishes
+  end
+
   resources :dishes
   resources :shifts
 
@@ -28,6 +35,7 @@ Rails.application.routes.draw do
   get "list-tables/:shift_id", to: "tables#list_tables"
   get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
   get "category/:id/dishes", to: "categories#list_dishes"
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
