@@ -6,6 +6,7 @@
           <th>Thumbnail</th>
           <th>Name</th>
           <th>Description</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +15,7 @@
             <td><%= image_tag dish.pictures[0].image.url, class: "img-thumbnail", style: "width: 100px; height: 100px" %></td>
             <td><%= dish.name %></td>
             <td><%= dish.description %></td>
+            <td><%= link_to "Add", '#', onclick: "addDish()" %></td>
           </tr>
         <% end %>
       </tbody>
