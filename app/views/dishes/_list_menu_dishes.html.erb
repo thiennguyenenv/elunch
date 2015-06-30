@@ -6,16 +6,14 @@
           <th>Thumbnail</th>
           <th>Name</th>
           <th>Description</th>
-          <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        <% @dishes.each do |dish| %>
+        <% @menu.dishes.each do |dish| %>
           <tr>
             <td><%= image_tag dish.pictures[0].image.url, class: "img-thumbnail", style: "width: 100px; height: 100px" %></td>
             <td><%= dish.name %></td>
             <td><%= dish.description %></td>
-            <td><%= link_to "Add", '#', onclick: "addDish(this)", "data-menu" => @menu_id, "data-dish" => dish.id %></td>
           </tr>
         <% end %>
       </tbody>

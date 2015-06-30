@@ -39,8 +39,15 @@
       <h3>Dishes</h3>
     </div>
     <div class="content">
-      <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name"), onchange: "loadDishes(this)", include_blank: true %>
+      <%= select_tag "category", options_from_collection_for_select(@categories, "id", "name"), onchange: "loadDishes(this)", "data-menu" => @menu.id, include_blank: true %>
       <div id="list_dishes"></div>
+    </div>
+
+    <div class="header">
+      <h3>Menu Items</h3>
+    </div>
+    <div class="content">
+      <div id="added_dishes"></div>
     </div>
   <% end %>
 </div>

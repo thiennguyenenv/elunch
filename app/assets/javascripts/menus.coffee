@@ -1,3 +1,12 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  @addDish = (source) ->
+    menuId = $(source).data('menu')
+    dishId = $(source).data('dish')
+    $.ajax
+      url: '/menus/' + menuId + '/dishes'
+      type: 'POST'
+      data:
+        dish_id: dishId
+      dataType: 'html'
+      success: (data) ->
+        $('#added_dishes').html(data)

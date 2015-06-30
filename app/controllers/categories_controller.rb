@@ -39,6 +39,7 @@ class CategoriesController < ApplicationController
 
   def list_dishes
     @dishes =  Dish.where(category_id: params[:id])
+    @menu_id = params[:menu] if params[:menu]
     render partial: 'list_dishes'
   end
 

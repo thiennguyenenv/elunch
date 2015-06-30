@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   end
 
   resources :menus do
-    resources :dishes
+    resources :dishes, controller: 'menu_dishes', only: [:index, :create, :destroy]
+  end
+  resource :dishes do
+    resources :menus, controller: 'dish_menus', only: [:index, :create, :destroy]
   end
 
   resources :dishes
@@ -35,6 +38,13 @@ Rails.application.routes.draw do
   get "list-tables/:shift_id", to: "tables#list_tables"
   get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
   get "category/:id/dishes", to: "categories#list_dishes"
+
+  get 'menu_dishes', to: "menu_dishes#index"
+  post 'menu_dishes', to: "menu_dishes#create"
+  delete 'menu_dishes', to: "menu_dishes#destroy"
+  get 'dish_menus', to: "dish_menus#index"
+  post 'dish_menus', to: "dish_menus#create"
+  delete 'dish_menus', to: "dish_menus#destroy"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
