@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :meals do
     resources :menus
   end
+  put 'meals/:id/select_menu', to: "meals#select_menu"
 
   resources :dishes
 

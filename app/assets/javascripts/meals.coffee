@@ -1,10 +1,11 @@
 $ ->
-  @loadDishes = (source) ->
-    categoryId = source.value
+  @selectMenu = (source) ->
     menuId = $(source).data('menu')
     $.ajax
-      url: '/category/' + categoryId + '/dishes?menu=' + menuId
-      type: 'GET'
+      url: 'select_menu'
+      type: 'PUT'
+      data:
+        menu_id: menuId
       dataType: 'html'
       success: (data) ->
-        $('#list_dishes').html(data)
+        $('#meal_items').html(data)

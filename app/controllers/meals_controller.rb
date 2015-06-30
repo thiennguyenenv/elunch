@@ -1,6 +1,6 @@
 class MealsController < ApplicationController
   layout :determine_layout
-  before_action :set_meal, only: [:show, :edit, :update, :destroy]
+  before_action :set_meal, only: [:show, :edit, :update, :destroy, :select_menu]
 
   respond_to :html
 
@@ -41,6 +41,15 @@ class MealsController < ApplicationController
   def destroy
     @meal.destroy
     respond_with(@meal)
+  end
+
+  def select_menu
+    @menu = Menu.find(params[:menu_id])
+    if @menu.present?
+      @meal.menu_id = @menu.id
+      @meal.save
+      render partial: 'list_meal_items'
+    end
   end
 
   private

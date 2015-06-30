@@ -1,0 +1,29 @@
+<% if @meal.menu.present? %>
+  <div class="header">
+    <h3>Menu: <%= @meal.menu.try(:name) %></h3>
+  </div>
+  <div class="content">
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Thumbnail</th>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @meal.menu.dishes.each do |dish| %>
+              <tr>
+                <td><%= image_tag dish.pictures[0].image.url, class: "img-thumbnail", style: "width: 100px; height: 100px" %></td>
+                <td><%= dish.name %></td>
+                <td><%= dish.description %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
