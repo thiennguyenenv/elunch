@@ -20,4 +20,3 @@ $ ->
       dataType: 'html'
       success: (data) ->
         $('#added_dishes').html(data)
-

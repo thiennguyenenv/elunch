@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     resources :menus
   end
 
+  resources :dishes
+
   resources :menus do
     resources :dishes, controller: 'menu_dishes', only: [:index, :create, :destroy]
   end
@@ -21,7 +23,6 @@ Rails.application.routes.draw do
     resources :menus, controller: 'dish_menus', only: [:index, :create, :destroy]
   end
 
-  resources :dishes
   resources :shifts
 
   root to: 'main#index'
