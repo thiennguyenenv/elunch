@@ -1,8 +1,9 @@
 $ ->
   @selectMenu = (source) ->
+    mealId = $(source).data('meal')
     menuId = $(source).data('menu')
     $.ajax
-      url: 'select_menu'
+      url: '/meals/' + mealId + '/select_menu'
       type: 'PUT'
       data:
         menu_id: menuId
