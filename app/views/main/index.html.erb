@@ -1,138 +1,25 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-4 col-xs-6">
-      <span>Today Menu</span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
+  <% @two_days.each do |day| %>
+    <div class="row">
+      <div class="col-md-4 col-xs-6">
+        <span><%= day.meal_date %></span>
       </div>
     </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_2.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
+    <div class="row">
+      <% day.menu.dishes.each do |dish| %>
+        <div class="meal-tile col-md-2 col-xs-12">
+          <div class="meal-inner-tile">
+            <div class="img-wrap">
+              <%= image_tag dish.pictures[0].nil? ? '' : dish.pictures[0].image.url %>
+            </div>
+            <div class="meal-tile-content">
+              <div class="details">
+                <h2 class="title"><%= dish.name %></h2>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      <% end %>
     </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_3.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-4 col-xs-6">
-      <span>Tomorrow Menu</span>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_2.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_3.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="meal-tile col-md-2 col-xs-12">
-      <div class="meal-inner-tile">
-        <div class="img-wrap">
-          <%= image_tag("meal_1.JPG") %>
-        </div>
-        <div class="meal-tile-content">
-          <div class="details">
-            <h2 class="title">Meal 1</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <% end %>
 </div>
