@@ -25,6 +25,7 @@ class MealsController < ApplicationController
 
   def create
     new_meal = meal_params
+    new_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], "%m/%d/%Y") rescue nil
     @meal = Meal.new(new_meal)
     respond_with(@meal) do |format|
       if @meal.save
@@ -39,6 +40,7 @@ class MealsController < ApplicationController
 
   def update
     update_meal = meal_params
+    update_meal[:meal_date] = DateTime.strptime(update_meal[:meal_date], "%m/%d/%Y") rescue nil
     @meal.update(update_meal)
     respond_with(@meal)
   end

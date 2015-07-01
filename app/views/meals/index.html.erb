@@ -23,7 +23,7 @@
           <tbody>
             <% @meals.each do |meal| %>
               <tr>
-                <td><%= meal.meal_date.strftime("%d/%m/%Y") %></td>
+                <td><%= meal.meal_date.strftime("%m/%d/%Y") %></td>
                 <td><%= meal.preordered_meals %></td>
                 <td><%= meal.actual_meals %></td>
                 <td><%= meal.extra_meals %></td>
@@ -36,6 +36,9 @@
           </tbody>
         </table>
       </div>
+    </div>
+    <div class="row">
+      <%= paginate @meals %>
     </div>
   </div>
 </div>

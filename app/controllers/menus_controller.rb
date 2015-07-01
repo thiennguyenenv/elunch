@@ -5,7 +5,7 @@ class MenusController < ApplicationController
   respond_to :html
 
   def index
-    @menus = Menu.all
+    @menus = Kaminari.paginate_array(Menu.all).page(params[:page])
     respond_with(@menus)
   end
 

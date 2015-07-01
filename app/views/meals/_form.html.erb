@@ -9,7 +9,7 @@
         <%= f.label :meal_date, class: "col-sm-3 control-label" %>
         <div class="col-sm-3">
           <div class='input-group date' id='dp_meal_date'>
-            <%= f.text_field :meal_date, value: @meal.meal_date.nil? ? '' : @meal.meal_date.strftime('%I:%M %p'), class: "form-control" %>
+            <%= f.text_field :meal_date, value: @meal.meal_date.nil? ? '' : @meal.meal_date.strftime('%m/%d/%Y'), class: "form-control" %>
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
