@@ -34,7 +34,7 @@ class MenusController < ApplicationController
         meal.menu_id = @menu.id
         meal.save
       end
-      flash[:notice] = 'Menu was successfully created.'
+      flash.now[:notice] = 'Menu was successfully created.'
     end
     respond_with(@menu) do |format|
       format.html { render action: :edit }

@@ -25,15 +25,20 @@ class MealsController < ApplicationController
 
   def create
     new_meal = meal_params
-    new_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], '%m/%d/%Y')
     @meal = Meal.new(new_meal)
-    @meal.save
-    respond_with(@meal)
+    respond_with(@meal) do |format|
+      if @meal.save
+        @menus = Menu.all
+        flash.now[:notice] = 'Meal was successfully created.'
+        format.html { render action: :edit }
+      else
+        format.html { render action: :new }
+      end
+    end
   end
 
   def update
     update_meal = meal_params
-    update_meal[:meal_date] = DateTime.strptime(new_meal[:meal_date], '%m/%d/%Y')
     @meal.update(update_meal)
     respond_with(@meal)
   end

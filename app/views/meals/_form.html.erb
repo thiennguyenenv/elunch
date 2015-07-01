@@ -45,41 +45,43 @@
       </div>
     <% end %>
   </div>
-  <div class="header">
-    <h3>Menus</h3>
-  </div>
-  <div class="content">
-    <% unless @meal.menu.present? %>
+  <% unless @meal.new_record? %>
+    <div class="header">
+      <h3>Menus</h3>
+    </div>
+    <div class="content">
+      <% unless @meal.menu.present? %>
+        <div class="row">
+          <%= link_to "Create Menu", new_meal_menu_path(@meal), class: "btn btn-primary" %>
+        </div>
+      <% end %>
       <div class="row">
-        <%= link_to "Create Menu", new_meal_menu_path(@meal), class: "btn btn-primary" %>
-      </div>
-    <% end %>
-    <div class="row">
-      <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @menus.each do |menu| %>
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped table-hover">
+            <thead>
               <tr>
-                <td><%= menu.name %></td>
-                <td><%= menu.description %></td>
-                <td><%= link_to "Select", '#', onclick: "selectMenu(this)", "data-meal" => @meal.id, "data-menu" => menu.id %></td>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @menus.each do |menu| %>
+                <tr>
+                  <td><%= menu.name %></td>
+                  <td><%= menu.description %></td>
+                  <td><%= link_to "Select", '#', onclick: "selectMenu(this)", "data-meal" => @meal.id, "data-menu" => menu.id %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-  <div id="meal_items">
-    <%= render 'list_meal_items' %>
-  </div>
+    <div id="meal_items">
+      <%= render 'list_meal_items' %>
+    </div>
+  <% end %>
 </div>
 <script type="text/javascript">
   $(function () {
