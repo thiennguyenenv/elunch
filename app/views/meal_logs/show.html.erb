@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meal:</strong>
+  <%= @meal_log.meal_id %>
+</p>
+
+<p>
+  <strong>Table:</strong>
+  <%= @meal_log.table_id %>
+</p>
+
+<p>
+  <strong>Tracking data:</strong>
+  <%= @meal_log.tracking_data %>
+</p>
+
+<%= link_to 'Edit', edit_meal_log_path(@meal_log) %> |
+<%= link_to 'Back', meal_logs_path %>

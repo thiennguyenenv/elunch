@@ -1,0 +1,6 @@
+<%= label_tag "group", "Tables", class: "col-sm-3 control-label" %>
+<div class="btn-group col-sm-9" role="group">
+  <% @tables.each do |table| %>
+    <button type="button" class="btn btn-default" data-table="<%= table.id%>"><%= table.name %></button>
+  <% end %>
+</div>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :meal_logs
+
   resources :pictures
 
   resources :categories
@@ -39,6 +41,7 @@ Rails.application.routes.draw do
   get "view-table/:id", to: "tables#view_table"
   get "list-tables/:shift_id", to: "tables#list_tables"
   get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
+  get "list-table-names/:shift_id", to: "tables#list_table_names"
   get "category/:id/dishes", to: "categories#list_dishes"
 
   get 'menu_dishes', to: "menu_dishes#index"

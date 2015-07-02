@@ -1,0 +1,39 @@
+<div class="panel-flat">
+  <div class="header">
+    <h3>Meal Logs</h3>
+  </div>
+  <div class="content">
+    <div class="row">
+      <%= link_to "Create Meal Log", new_meal_log_path, class: "btn btn-primary" %>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped">
+          <thead>
+            <tr>
+              <th>Meal</th>
+              <th>Table</th>
+              <th>Tracking data</th>
+              <th colspan="3">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @meal_logs.each do |meal_log| %>
+              <tr>
+                <td><%= meal_log.meal_id %></td>
+                <td><%= meal_log.table_id %></td>
+                <td><%= meal_log.tracking_data %></td>
+                <td><%= link_to 'Show', meal_log %></td>
+                <td><%= link_to 'Edit', edit_meal_log_path(meal_log) %></td>
+                <td><%= link_to 'Destroy', meal_log, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <%= paginate @meal_logs %>
+    </div>
+  </div>
+</div>
