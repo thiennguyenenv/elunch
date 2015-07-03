@@ -2,49 +2,32 @@
   <div class="header">
     <h3><%= @meal_log.new_record? ? "Create Meal Log" : "Update Meal Log" %></h3>
   </div>
-  <div class="content">
-
-    <%= form_for(@meal_log, html: {class: "form-horizontal"}) do |f| %>
-      <%= error_messages @meal_log %>
-      <div class="form-group">
-        <%= label_tag 'shifts-list', "Select Shift", class: "col-sm-3 control-label" %>
-        <div id="shifts-list" class="col-sm-9 btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
-          <% @shifts.each do |shift| %>
-            <label class="btn btn-success" onclick="listTablesOfShift(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
-              <input type="radio" name="shifts" />
-              <%= shift.name %>
-            </label>
-          <% end %>
-        </div>
+  <div class="content form-horizontal">
+    <%= error_messages @meal_log %>
+    <div class="form-group">
+      <%= label_tag :meal_id, 'Meal', class: "col-sm-3 control-label" %>
+      <div class="col-sm-6">
+        <%= select_tag :meal_id, options_from_collection_for_select(@meals, "id", "meal_date") %>
       </div>
-      <div id="table-group" class="form-group"></div>
-      <div class="form-group">
-        <%= f.label :meal_id, class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.number_field :meal_id, class: "form-control" %>
-        </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :menu_id, 'Menu', class: "col-sm-3 control-label" %>
+      <div class="col-sm-6">
+        <%= select_tag :menu_id, options_from_collection_for_select(@menus, "id", "name") %>
       </div>
-      <div class="form-group">
-        <%= f.label :table_id, class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.number_field :table_id, class: "form-control" %>
-        </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag 'shifts-list', "Select Shift", class: "col-sm-3 control-label" %>
+      <div id="shifts-list" class="col-sm-9 btn-group btn-group-sm" role="group" aria-label="Shifts" data-toggle="buttons">
+        <% @shifts.each do |shift| %>
+          <label class="btn btn-success" onclick="listTablesOfShift(this)" id="<%= "shift_#{shift.id}"%>" data-shift="<%= shift.id %>">
+            <input type="radio" name="shifts" />
+            <%= shift.name %>
+          </label>
+        <% end %>
       </div>
-      <div class="form-group">
-        <%= f.label :tracking_data, class: "col-sm-3 control-label" %>
-        <div class="col-sm-9">
-          <%= f.text_area :tracking_data, class: "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-9">
-          <% if @meal_log.new_record? %>
-            <%= f.submit "Create", class: "btn btn-primary" %>
-          <% else %>
-            <%= f.submit "Update", class: "btn btn-primary" %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    </div>
+    <div id="table-group" class="form-group"></div>
+    <div id="table-detail" class="form-group"></div>
   </div>
 </div>

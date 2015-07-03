@@ -16,11 +16,15 @@ class MealLogsController < ApplicationController
   def new
     @shifts = Shift.all
     @meal_log = MealLog.new
+    @meals = Meal.all
+    @menus = Menu.all
     respond_with(@meal_log)
   end
 
   def edit
     @shifts = Shift.all
+    @meals = Meal.all
+    @menus = Menu.all
   end
 
   def create
@@ -39,12 +43,23 @@ class MealLogsController < ApplicationController
     respond_with(@meal_log)
   end
 
+  def track_data
+    table = Table.find(params[:id])
+    if table.present?
+      table.cached_seats.each do |seat|
+        seat[:status] = 1
+      end
+      @meal_log = MealLog.where(meal_id: params[:meal], menu_id: params[:menu], table_id: params[:id]).first_or_create(tracking_data: table.cached_seats)
+    end
+    render partial: 'view_table_with_status', object: @meal_log
+  end
+
   private
   def set_meal_log
     @meal_log = MealLog.find(params[:id])
   end
 
   def meal_log_params
-    params.require(:meal_log).permit(:meal_id, :table_id, :tracking_data)
+    params.require(:meal_log).permit(:meal_id, :table_id, :menu_id, :tracking_data, :notes)
   end
 end
