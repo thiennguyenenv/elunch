@@ -22,7 +22,7 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jQuery as the JavaScript library
 gem 'jquery-rails', '~> 2.3.0'
-gem 'pjax-rails', '~> 0.1.4'
+gem 'rack-pjax', '~> 0.8.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
