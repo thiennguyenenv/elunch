@@ -11,6 +11,8 @@
         <table class="table table-bordered table-hover table-striped">
           <thead>
             <tr>
+              <th>#</th>
+              <th>Notes</th>
               <th>Meal</th>
               <th>Table</th>
               <th>Tracking data</th>
@@ -20,6 +22,8 @@
           <tbody>
             <% @meal_logs.each do |meal_log| %>
               <tr>
+                <td><%= meal_log.id %></td>
+                <td><%= meal_log.notes %></td>
                 <td><%= meal_log.meal_id %></td>
                 <td><%= meal_log.table_id %></td>
                 <td><%= meal_log.tracking_data %></td>

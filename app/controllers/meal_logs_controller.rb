@@ -34,8 +34,9 @@ class MealLogsController < ApplicationController
   end
 
   def update
+    build_track(params[:meal_log][:seats])
     flash[:notice] = 'MealLog was successfully updated.' if @meal_log.update(meal_log_params)
-    respond_with(@meal_log)
+    render partial: 'view_table_with_status', object: @meal_log
   end
 
   def destroy
@@ -61,5 +62,12 @@ class MealLogsController < ApplicationController
 
   def meal_log_params
     params.require(:meal_log).permit(:meal_id, :table_id, :menu_id, :tracking_data, :notes)
+  end
+
+  def build_track(seats)
+    seats.each do |seat|
+      data = @meal_log[:tracking_data].find { |user| user[:id] == seat[:id].to_i }
+      data[:status] = seat[:status]
+    end
   end
 end
