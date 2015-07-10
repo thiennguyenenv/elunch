@@ -67,3 +67,39 @@
     </div>
   </div>
 </div>
+<script type="text/javascript">
+$(function() {
+  $('form.edit_meal_log').submit(function() {
+    id = $('#meal_log_id').val();
+    notes = $('#meal_log_notes').val();
+    valuesToSubmit = {
+      meal_log: {
+        notes: notes,
+        seats: jsonSeats()
+      }
+    };
+
+    $.ajax({
+      url: '/meal_logs/' + id,
+      type: 'PATCH',
+      data: JSON.stringify(valuesToSubmit),
+      dataType: 'html',
+      contentType: 'application/json',
+      success: function(data) {
+        console.log('Success!');
+        $('#table-detail').html(data);
+      }
+    });
+
+    return false; // prevent normal behavior
+  });
+
+  function jsonSeats(){
+    var seats = []
+    $('input[type=radio][name!=shifts]:checked').each(function(index) {
+      seats.push({id: $(this).attr('name'), status: $(this).val()});
+    });
+    return seats
+  }
+});
+</script>
