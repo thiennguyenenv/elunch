@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703030625) do
+ActiveRecord::Schema.define(version: 20150710071809) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,22 @@ ActiveRecord::Schema.define(version: 20150703030625) do
     t.string   "meal_token"
   end
 
+  create_table "seating_chart_categories", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "seating_charts", force: true do |t|
+    t.string   "description"
+    t.integer  "table_id"
+    t.integer  "chart_category_id"
+    t.string   "seating_chart"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
   create_table "shifts", force: true do |t|
     t.text     "name"
     t.text     "description"
@@ -114,8 +130,11 @@ ActiveRecord::Schema.define(version: 20150703030625) do
   end
 
   create_table "tables_users", id: false, force: true do |t|
-    t.integer "table_id"
-    t.integer "user_id"
+    t.integer  "table_id"
+    t.integer  "user_id"
+    t.integer  "seating_chart_cat_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|

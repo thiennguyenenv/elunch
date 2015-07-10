@@ -3,8 +3,10 @@ class Table < ActiveRecord::Base
   validates :name, presence: true
   validates :seats, numericality: { only_integer: true, greater_than: 0 }
 
-
-  has_and_belongs_to_many :users
+  belongs_to :shift
+  has_many :seating_charts
+  has_many :tables_users
+  has_many :users, through: :tables_users
   default_scope { order('id ASC') }
 
   serialize :cached_seats

@@ -4,7 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :tables
+  has_many :tables_users
+  has_many :tables, through: :tables_users
 
   has_attached_file :avatar, styles: { medium: "600x600#", thumb: "60x60#"}, :default_url => "/avatar/:style/user.png",
     path: ":rails_root/public/avatar/:id/:style_:filename",
