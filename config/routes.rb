@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   end
 
   resources :shifts
+  resources :seating_chart_categories
 
   root to: 'main#index'
 

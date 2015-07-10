@@ -1,0 +1,31 @@
+<div class="panel-flat">
+  <div class="header">
+    <h3><%= @chart_category.new_record? ? "Create Chart Category" : "Update Chart Category" %></h3>
+  </div>
+  <div class="content">
+    <%= form_for(@chart_category, html: {class: 'form-horizontal'}) do |f| %>
+      <%= error_messages(@chart_category) %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %>
+        <div class="col-sm-9">
+          <%= f.text_area :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+          <% if @chart_category.new_record? %>
+            <%= f.submit "Create", class: "btn btn-success" %>
+          <% else %>
+            <%= f.submit "Update", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
