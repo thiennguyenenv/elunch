@@ -23,11 +23,9 @@ class TablesController < ApplicationController
 
   def create
     @table = Table.new(table_params)
-    if @table.init_seats
-      @table.save
+    if @table.save && @table.init_seats(params[:table][:seats])
+      respond_with(@table)
     end
-        
-    respond_with(@table)
   end
 
   def update
@@ -65,6 +63,6 @@ class TablesController < ApplicationController
   end
 
   def table_params
-    params.require(:table).permit(:name, :description, :seats, :shift_id, :available_seats, :for_vegans)
+    params.require(:table).permit(:name, :description, :shift_id, :for_vegans)
   end
 end

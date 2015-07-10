@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710071809) do
+ActiveRecord::Schema.define(version: 20150710090148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,8 @@ ActiveRecord::Schema.define(version: 20150710071809) do
     t.string   "seating_chart"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.integer  "number_seats"
+    t.integer  "available_seats"
   end
 
   create_table "shifts", force: true do |t|
