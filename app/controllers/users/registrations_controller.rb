@@ -70,7 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       current_user.tables << table
       current_user.save
     end
-    render 'main/index'
+    redirect_to root_path
   end
 
   def leave_table
@@ -84,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       end
       current_user.save!
     end
-    render 'main/index'
+    redirect_to root_path
   end
 
   def crop

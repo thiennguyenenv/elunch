@@ -90,8 +90,8 @@
           <%= label_tag table.name, table.name + (table.for_vegans? ? ' (for vegans)' : ''), class: "control-label text-center col-sm-3 col-xs-12" %>
           <div class="col-md-4 col-xs-12">
             <div class="outer-circle">
-              <ul class=<%= "circle-container-#{table.seats}" %> >
-                <% table.cached_seats.each do |user| %>
+              <ul class=<%= "circle-container-#{table.chart.number_seats}" %> >
+                <% table.chart.seating_chart.each do |user| %>
                   <li>
                     <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
                   </li>

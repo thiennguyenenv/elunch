@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-4">
     <div class="outer-circle">
-      <ul class=<%= "circle-container-#{view_table.seats}" %> >
-        <% view_table.cached_seats.each do |user| %>
+      <ul class=<%= "circle-container-#{view_table.chart.number_seats}" %> >
+        <% view_table.chart.seating_chart.each do |user| %>
           <li>
             <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
           </li>
@@ -23,7 +23,7 @@
           </tr>
         </thead> 
         <tbody class="valign-middle">
-          <% view_table.cached_seats.each_with_index do |user, index| %>
+          <% view_table.chart.seating_chart.each_with_index do |user, index| %>
             <tr>
               <td><%= index + 1 %></td>
               <td>

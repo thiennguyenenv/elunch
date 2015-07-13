@@ -29,43 +29,62 @@ class Table < ActiveRecord::Base
 
   def add_seat(user)
     return false unless user.id.present?
-    this.seating_charts.each do |chart|
-      if chart.available_seats > 0
-        index = 0
-        chart.seating_chart.each do |seat|
-          if seat[:id] == "-1"
-            chart.available_seats -= 1
-            chart.seating_chart[index] = { id: user.id, first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
-            return chart.save
+    ActiveRecord::Base.transaction do
+      begin
+        seating_charts.each do |chart|
+          if chart.available_seats > 0
+            index = 0
+            position = chart.seating_chart.find_index { |seat| seat[:id] == '-1' }
+            if position.present?
+              chart.available_seats -= 1
+              chart.seating_chart[position] = { id: user.id, first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
+              chart.save
+            end
+          else
+            return false
           end
-          index += 1
         end
+        return true
+      rescue
+        return false
       end
     end
-    return true
   end
 
   def empty_seat(user_id)
-    index = 0
-    self.cached_seats.each do |seat|
-      if seat[:id] == user_id
-        self.available_seats += 1
-        self.cached_seats[index] = DEFAULT_SEAT
-        return self.save
+    ActiveRecord::Base.transaction do
+      begin
+        seating_charts.each do |chart|
+          position = chart.seating_chart.find_index { |seat| seat[:id] == user_id }
+          if position.present?
+            chart.available_seats += 1
+            chart.seating_chart[position] = DEFAULT_SEAT
+            chart.save
+          else
+            return false
+          end
+        end
+        return true
+      rescue
+        return false
       end
-      index += 1
     end
-    return false
+  end
+
+  def chart(cat_id = 1)
+    seating_charts.where(chart_category_id: cat_id).first
   end
 
   def update_cached_seats(user)
     index = 0
-    self.cached_seats.each do |seat|
-      if seat[:id].to_i == user.id
-        self.cached_seats[index] = { first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
-        return self.save
+    seating_charts.each do |chart|
+      chart.seating_chart.each do |seat|
+        if seat[:id].to_i == user.id
+          chart.seating_charts[index] = { first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
+          return chart.save
+        end
+        index += 1
       end
-      index += 1
     end
   end
 
