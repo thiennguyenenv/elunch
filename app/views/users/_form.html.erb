@@ -91,21 +91,21 @@
     <h3>Table(s)</h3>
   </div>
   <div class="content">
-    <% if current_user.tables.count > 0 %>
-      <% current_user.tables.each do |table| %>
+    <% if @user.tables.count > 0 %>
+      <% @user.tables.each do |table| %>
         <div class="row">
           <%= label_tag table.name, table.name + (table.for_vegans? ? ' (for vegans)' : ''), class: "control-label text-center col-sm-3 col-xs-12" %>
           <div class="col-md-4 col-xs-12">
             <div class="outer-circle">
-              <ul class=<%= "circle-container-#{table.seats}" %> >
-                <% table.cached_seats.each do |user| %>
+              <ul class=<%= "circle-container-#{table.chart.number_seats}" %> >
+                <% table.chart.seating_chart.each do |user| %>
                   <li>
                     <a href='#'><img src="<%= user[:avatar_url] %>"/></a>
                   </li>
                 <% end %>
               </ul>
             </div>
-            <%= form_for current_user, url: users_leave_table_path, html: { class: "text-center"}, method: :put, data: { confirm: "Are you sure you want to leave this table?" } do |f| %>
+            <%= form_for @user, url: users_leave_table_path, html: { class: "text-center"}, method: :put, data: { confirm: "Are you sure you want to leave this table?" } do |f| %>
               <%= f.hidden_field :table_id, value: table.id %>
               <%= f.submit 'Leave', class: "btn btn-danger" %>
             <% end %>

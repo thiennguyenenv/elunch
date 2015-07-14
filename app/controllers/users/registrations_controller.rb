@@ -61,29 +61,51 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def join_table
     table = Table.find(params[:user][:table_id])
-    if table.add_seat(current_user)
-      if table.for_vegans
-        current_user.progress_status |= 0b00000100
-      else
-        current_user.progress_status |= 0b00000010
+    if table.for_vegans?
+      normal_table_chart_on_vegan_days = current_user.tables_users.find { |tu| tu.table_id != table.id && tu.seating_chart_cat_id == 2 }
+      if normal_table_chart_on_vegan_days.present?
+        normal_table_chart_on_vegan_days.delete
+        Table.find(normal_table_chart_on_vegan_days.table_id).empty_seat(current_user, 2)
       end
-      current_user.tables << table
-      current_user.save
+      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id }
+        current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 2)
+        table.add_seat(current_user, 2)
+      end
+      current_user.progress_status |= 0b00000100
+    else
+      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id && tu.seating_chart_cat_id == 1 }
+        current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 1)
+        table.add_seat(current_user, 1)
+      end
+      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id && tu.seating_chart_cat_id == 2 }
+        current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 2)
+        table.add_seat(current_user, 2)
+      end
+      current_user.progress_status |= 0b00000010
     end
+
+    current_user.save!
     redirect_to root_path
   end
 
   def leave_table
-    leave_table = current_user.tables.find(params[:user][:table_id])
-    if leave_table.present? && leave_table.empty_seat(current_user.id)
-      current_user.tables.delete(leave_table)
-      if leave_table.for_vegans?
-        current_user.progress_status ^= 0b00000100
-      else
-        current_user.progress_status ^= 0b00000010
-      end
-      current_user.save!
+    leave_table = Table.find(params[:user][:table_id])
+    current_user.tables_users.each do |tu|
+      current_user.tables_users.destroy(tu) if tu.table_id == leave_table.id
     end
+    leave_table.empty_seat(current_user)
+    if leave_table.for_vegans?
+      normal_table_chart_for_vegan_days = current_user.tables_users.find { |tu| tu.table_id != leave_table.id }
+      if normal_table_chart_for_vegan_days.present?
+        current_user.tables_users.push TablesUser.new(table_id: normal_table_chart_for_vegan_days.table_id, user_id: current_user.id, seating_chart_cat_id: 2)
+        Table.find(normal_table_chart_for_vegan_days.table_id).add_seat(current_user, 2)
+      end
+      current_user.progress_status ^= 0b00000100
+    else
+      current_user.progress_status ^= 0b00000010
+    end
+
+    current_user.save!
     redirect_to root_path
   end
 

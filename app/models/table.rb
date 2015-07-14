@@ -27,11 +27,12 @@ class Table < ActiveRecord::Base
     return true
   end
 
-  def add_seat(user)
+  def add_seat(user, cat_id = nil)
     return false unless user.id.present?
     ActiveRecord::Base.transaction do
       begin
-        seating_charts.each do |chart|
+        charts = if cat_id.nil? then seating_charts else seating_charts.where(chart_category_id: cat_id) end
+        charts.each do |chart|
           if chart.available_seats > 0
             index = 0
             position = chart.seating_chart.find_index { |seat| seat[:id] == '-1' }
@@ -51,11 +52,12 @@ class Table < ActiveRecord::Base
     end
   end
 
-  def empty_seat(user_id)
+  def empty_seat(user, cat_id = nil)
     ActiveRecord::Base.transaction do
       begin
-        seating_charts.each do |chart|
-          position = chart.seating_chart.find_index { |seat| seat[:id] == user_id }
+        charts = if cat_id.nil? then seating_charts else seating_charts.where(chart_category_id: cat_id) end
+        charts.each do |chart|
+          position = chart.seating_chart.find_index { |seat| seat[:id] == user.id }
           if position.present?
             chart.available_seats += 1
             chart.seating_chart[position] = DEFAULT_SEAT
@@ -71,8 +73,8 @@ class Table < ActiveRecord::Base
     end
   end
 
-  def chart(cat_id = 1)
-    seating_charts.where(chart_category_id: cat_id).first
+  def chart
+    seating_charts.where(chart_category_id: tables_users[0].seating_chart_cat_id).first
   end
 
   def update_cached_seats(user)
