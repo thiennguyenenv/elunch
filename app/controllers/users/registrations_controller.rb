@@ -77,7 +77,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 1)
         table.add_seat(current_user, 1)
       end
-      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id && tu.seating_chart_cat_id == 2 }
+      unless current_user.tables_users.find { |tu| tu.user_id == current_user.id && tu.seating_chart_cat_id == 2 }
         current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 2)
         table.add_seat(current_user, 2)
       end

@@ -10,7 +10,7 @@ class Table < ActiveRecord::Base
 
   serialize :cached_seats
 
-  DEFAULT_SEAT = { id: "-1", first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
+  DEFAULT_SEAT = { id: -1, first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
 
   def init_seats(number_seats_param)
     seats = number_seats_param.to_i
@@ -35,7 +35,7 @@ class Table < ActiveRecord::Base
         charts.each do |chart|
           if chart.available_seats > 0
             index = 0
-            position = chart.seating_chart.find_index { |seat| seat[:id] == '-1' }
+            position = chart.seating_chart.find_index { |seat| seat[:id] == -1 }
             if position.present?
               chart.available_seats -= 1
               chart.seating_chart[position] = { id: user.id, first_name: user.first_name, last_name: user.last_name, available: :true, avatar_url: user.avatar.url(:thumb) }
@@ -73,8 +73,9 @@ class Table < ActiveRecord::Base
     end
   end
 
-  def chart
-    seating_charts.where(chart_category_id: tables_users[0].seating_chart_cat_id).first
+  def chart(default_id = 1)
+    chart_id = if tables_users.present? then tables_users[0].seating_chart_cat_id else default_id end
+    seating_charts.where(chart_category_id: chart_id).first
   end
 
   def update_cached_seats(user)
