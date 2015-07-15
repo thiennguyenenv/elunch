@@ -18,6 +18,7 @@ class MealLogsController < ApplicationController
     @meal_log = MealLog.new
     @meals = Meal.all
     @menus = Menu.all
+    @chart_categories = SeatingChartCategory.all
     respond_with(@meal_log)
   end
 
@@ -45,12 +46,12 @@ class MealLogsController < ApplicationController
   end
 
   def track_data
-    table = Table.find(params[:id])
+    table = SeatingChart.where(table_id: params[:id], chart_category_id: params[:chartCatId]).first
     if table.present?
-      table.cached_seats.each do |seat|
+      table.seating_chart.each do |seat|
         seat[:status] = 1
       end
-      @meal_log = MealLog.where(meal_id: params[:meal], menu_id: params[:menu], table_id: params[:id]).first_or_create(tracking_data: table.cached_seats)
+      @meal_log = MealLog.where(meal_id: params[:meal], menu_id: params[:menu], table_id: params[:id]).first_or_create(tracking_data: table.seating_chart)
     end
     render partial: 'view_table_with_status', object: @meal_log
   end
@@ -65,6 +66,7 @@ class MealLogsController < ApplicationController
   end
 
   def build_track(seats)
+    return unless seats.present?
     seats.each do |seat|
       data = @meal_log[:tracking_data].find { |user| user[:id] == seat[:id].to_i }
       data[:status] = seat[:status]

@@ -12,8 +12,9 @@ $ ->
     tableId = $(source).data('table')
     mealId = $('#meal_id').find(":selected").val()
     menuId = $('#menu_id').find(":selected").val()
+    chartCatId = $('#chart_category_id').find(":selected").val()
     $.ajax
-      url: '/view-table-seats-status/' + tableId + '?meal=' + mealId + '&menu=' + menuId
+      url: '/view-table-seats-status/' + tableId + '?meal=' + mealId + '&menu=' + menuId + '&chartCatId=' + chartCatId
       type: 'GET'
       dataType: 'html'
       success: (data) ->
