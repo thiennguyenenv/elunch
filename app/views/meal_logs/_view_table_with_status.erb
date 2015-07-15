@@ -7,6 +7,7 @@
       <div class="content">
         <%= form_for view_table_with_status do |f| %>
           <%= f.hidden_field :id %>
+          <%= f.hidden_field :table_id %>
           <div class="row">
             <div class="form-group">
               <%= f.label :notes, class: "col-sm-3 control-label" %>
@@ -60,7 +61,8 @@
             </div>
           </div>
           <div class="row">
-              <%= f.submit 'Save', class: "btn btn-primary" %>
+              <%= f.submit "Save", class: "btn btn-primary" %>
+              <%= link_to "Refresh track data", "#", onclick: "refreshSeatingChart();", class: "btn btn-info" %>
           </div>
         <% end %>
       </div>

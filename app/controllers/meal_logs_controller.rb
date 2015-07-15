@@ -46,12 +46,24 @@ class MealLogsController < ApplicationController
   end
 
   def track_data
-    table = SeatingChart.where(table_id: params[:id], chart_category_id: params[:chartCatId]).first
+    table = SeatingChart.where(table_id: params[:id], chart_category_id: params[:chart_cat_id]).first
     if table.present?
       table.seating_chart.each do |seat|
         seat[:status] = 1
       end
       @meal_log = MealLog.where(meal_id: params[:meal], menu_id: params[:menu], table_id: params[:id]).first_or_create(tracking_data: table.seating_chart)
+    end
+    render partial: 'view_table_with_status', object: @meal_log
+  end
+
+  def refresh_track_data
+    table = SeatingChart.where(table_id: params[:table_id], chart_category_id: params[:chart_cat_id]).first
+    if table.present?
+      @meal_log = MealLog.where(id: params[:id]).first
+      if @meal_log.present?
+        @meal_log.tracking_data = table.seating_chart
+        @meal_log.save
+      end
     end
     render partial: 'view_table_with_status', object: @meal_log
   end

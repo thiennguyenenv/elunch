@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   get "view-table/:id", to: "tables#view_table"
   get "view-table-seats-status/:id", to: "meal_logs#track_data"
+  get "refresh-data/:id", to: "meal_logs#refresh_track_data"
   get "list-tables/:shift_id", to: "tables#list_tables"
   get "list-vegan-tables/:shift_id", to: "tables#list_vegan_tables"
   get "list-table-names/:shift_id", to: "tables#list_table_names"
