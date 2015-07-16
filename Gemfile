@@ -81,6 +81,9 @@ gem 'kaminari', '~> 0.16.3'
 # File upload JS
 gem 'dropzonejs-rails', '~> 0.7.1'
 
+# Comment
+gem 'acts_as_commentable', '~> 4.0.2'
+
 group :development, :test do
   gem 'pry', '~> 0.10.1'
 
