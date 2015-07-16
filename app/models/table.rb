@@ -1,6 +1,7 @@
 class Table < ActiveRecord::Base
   attr_accessor :shifts
   validates :name, presence: true
+  validates :seats, numericality: { only_integer: true, greater_than: 0 }
 
   belongs_to :shift
   has_many :seating_charts
@@ -11,6 +12,8 @@ class Table < ActiveRecord::Base
   serialize :cached_seats
 
   DEFAULT_SEAT = { id: -1, first_name: "", last_name: "", available: "true", avatar_url: "/avatar/thumb/user.png" }
+
+  before_update :update_seating_chart, :if => :seats_changed?
 
   def init_seats(number_seats_param)
     seats = number_seats_param.to_i
@@ -25,6 +28,11 @@ class Table < ActiveRecord::Base
       new_seating_chart.save
     end
     return true
+  end
+
+  def update_seating_chart
+    # temporary not allow to update number of seats
+    return self.errors.add(:base, "Cannot update the seat of this table")
   end
 
   def add_seat(user, cat_id = nil)

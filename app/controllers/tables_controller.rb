@@ -29,7 +29,7 @@ class TablesController < ApplicationController
   end
 
   def update
-    @table.update(table_params)
+    @table.update(table_params) unless @table.errors.present?
     respond_with(@table)
   end
 
@@ -63,6 +63,6 @@ class TablesController < ApplicationController
   end
 
   def table_params
-    params.require(:table).permit(:name, :description, :shift_id, :for_vegans)
+    params.require(:table).permit(:name, :description, :shift_id, :for_vegans, :seats)
   end
 end

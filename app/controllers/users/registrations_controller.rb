@@ -67,17 +67,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
         normal_table_chart_on_vegan_days.delete
         Table.find(normal_table_chart_on_vegan_days.table_id).empty_seat(current_user, 2)
       end
-      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id }
+      unless current_user.tables_users.find { |tu| tu.table_id == table.id }
         current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 2)
         table.add_seat(current_user, 2)
       end
       current_user.progress_status |= 0b00000100
     else
-      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.user_id == current_user.id && tu.seating_chart_cat_id == 1 }
+      unless current_user.tables_users.find { |tu| tu.table_id == table.id && tu.seating_chart_cat_id == 1 }
         current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 1)
         table.add_seat(current_user, 1)
       end
-      unless current_user.tables_users.find { |tu| tu.user_id == current_user.id && tu.seating_chart_cat_id == 2 }
+      unless current_user.tables_users.find { |tu| tu.seating_chart_cat_id == 2 }
         current_user.tables_users.push TablesUser.new(table_id: table.id, user_id: current_user.id, seating_chart_cat_id: 2)
         table.add_seat(current_user, 2)
       end
