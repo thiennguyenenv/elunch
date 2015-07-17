@@ -1,5 +1,5 @@
 class Comment < ActiveRecord::Base
-
+  attr_accessor :meal_date
   include ActsAsCommentable::Comment
 
   belongs_to :commentable, :polymorphic => true

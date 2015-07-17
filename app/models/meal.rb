@@ -1,4 +1,5 @@
 class Meal < ActiveRecord::Base
+  acts_as_commentable
   attr_accessor :menu
   belongs_to :menus
 

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
   resources :shifts
   resources :seating_chart_categories
+  resources :comments
 
   root to: 'main#index'
 
