@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   resources :seating_chart_categories
   resources :comments
 
-  root to: 'main#index'
+  root to: 'main#index', constraints: -> (r) { r.env["warden"].authenticate? }, as: :authenticate_root
+  root to: 'main#cover'
 
   devise_scope :user do
     get "users/crop", to: "users/registrations#crop"

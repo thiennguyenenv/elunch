@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>E-Lunch</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <div class="masthead clearfix">
+            <div class="inner">
+              <%= link_to '', root_path, class: 'masthead-brand' %>
+              <nav>
+                <ul class="nav masthead-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">About Us</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+          <div class="cover">
+            <div class="ontop">
+              <h1 class="cover-heading">E-Lunch</h1>
+              <p class="lead">In-door Lunch Service</p>
+              <p class="lead">
+                <%= link_to 'Get Started', new_user_session_path, class: "btn btn-lg btn-primary" %>
+              </p>
+            </div>
+            <div class="cover-highlight"></div>
+          </div>
+
+          <div class="mastfoot">
+            <div class="inner">
+              <p>&copy; <a href="<%= root_path %>">E-Lunch</a>, by <a href="https://twitter.com/Theodore_Nguyen">@theodore</a>.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </body>
+</html>

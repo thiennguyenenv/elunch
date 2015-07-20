@@ -6,19 +6,21 @@
       </div>
     </div>
     <div class="row">
-      <% day.menu.dishes.each do |dish| %>
-        <div class="meal-tile col-md-2 col-xs-12">
-          <div class="meal-inner-tile">
-            <div class="img-wrap">
-              <%= image_tag dish.pictures[0].nil? ? '' : dish.pictures[0].image.url %>
-            </div>
-            <div class="meal-tile-content">
-              <div class="details">
-                <h2 class="title"><%= dish.name %></h2>
+      <% if day.menu.present? %>
+        <% day.menu.dishes.each do |dish| %>
+          <div class="meal-tile col-md-2 col-xs-12">
+            <div class="meal-inner-tile">
+              <div class="img-wrap">
+                <%= image_tag dish.pictures[0].nil? ? '' : dish.pictures[0].image.url %>
+              </div>
+              <div class="meal-tile-content">
+                <div class="details">
+                  <h2 class="title"><%= dish.name %></h2>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
