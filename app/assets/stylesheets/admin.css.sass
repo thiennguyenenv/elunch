@@ -7,10 +7,6 @@
 @import "font-awesome"
 @import "main"
 
-/* Hide for mobile, show later */
-.sidebar
-  display: none
-
 @media (min-width: 768px)
   .sidebar
     position: fixed
@@ -19,7 +15,7 @@
     left: 0
     z-index: 1000
     display: block
-    padding: 20px
+    padding: 20px 0 /* fix highlight, no padding left here */
     overflow-x: hidden
     overflow-y: auto /* Scrollable contents if viewport is shorter than content. */
     background-color: #2a623d
@@ -29,11 +25,37 @@ body
   padding-top: 80px
   background-color: #E7EBEE
 
+.navbar
+  margin-bottom: 0
+
+.row
+  height: 100%
+
+/* Fill the whole screen with color, below the nav bar */
+.box
+  position: absolute
+  background-color: #2a623d
+  top: 50px
+  left: 0
+  right: 0
+  bottom: 0
+  overflow: auto /* remove the empty space at the bottom of the page */
+
+.main
+  height: 100%
+  overflow: auto
+  background-color: #fff
+
+.toggle-sidebar
+  color: #fff
+  margin-left: 10px
+  float: left
+
 /* Sidebar navigation */
 .nav-sidebar
   margin-right: -21px /* 20px padding + 1px border */
-  margin-bottom: 20px
-  margin-left: -20px
+  // margin-bottom: 20px make ugly space at the end of the page
+  // margin-left: -20px make empty space with the flat panel
 
 .nav-sidebar > li > a
   padding-right: 20px
@@ -56,7 +78,8 @@ body
   background-color: #E7EBEE
 
 .panel-flat
-  margin-bottom: 40px
+  height: 100%
+  overflow: auto
   padding: 20px 20px
   background: #fff
   position: relative
@@ -128,3 +151,57 @@ body
 
 .alert li
   list-style: none
+
+/*
+ * Off Canvas
+ * --------------------------------------------------
+ */
+@media screen and (max-width: 767px)
+  .sidebar
+    position: absolute
+    display: block
+    height: 100%
+    width: 90%
+    top: 0
+    left: 0
+
+  .row-offcanvas
+    position: relative
+    height: 100%
+    -webkit-transition: all .25s ease-out
+    -o-transition: all .25s ease-out
+    transition: all .25s ease-out
+
+  .row-offcanvas-right
+    right: 0
+
+  .row-offcanvas-left
+    left: 0
+
+  .row-offcanvas-right
+  .sidebar-offcanvas
+    right: -50% /* 6 columns */
+
+  .row-offcanvas-left
+  .sidebar-offcanvas
+    left: -50%
+    position: fixed
+    bottom: 0
+    z-index: 1000
+    display: block
+    overflow-x: hidden
+    overflow-y: auto /* Scrollable contents if viewport is shorter than content. */
+    min-height: 100%
+    background-color: #2a623d
+    border-right: 1px solid #eee
+
+  .row-offcanvas-right.active
+    right: 50% /* 6 columns */
+
+  .row-offcanvas-left.active
+    left: 50% /* 6 columns */
+
+  .sidebar-offcanvas
+    position: absolute
+    top: 0
+    width: 50% /* 6 columns */

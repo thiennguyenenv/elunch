@@ -24,7 +24,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand  visible-md visible-lg" href="#">E-Lunch Dashboard</a>
+          <button type="button" class="navbar-toggle toggle-sidebar" data-toggle="offcanvas">
+            <span class="fa fa-chevron-right"></span>
+          </button>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -59,87 +62,88 @@
         </div>
       </div>
     </nav>
-
     <div class="fluid-container admin-container">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar sidebar-menu">
-            <li>
-              <a href="<%= root_path %>">
-                <i class="fa fa-cog"></i>
-                <span>Dashboard</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= users_path %>">
-                <i class="fa fa-users"></i>
-                <span>Users</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= meal_logs_path %>">
-                <i class="fa fa-coffee"></i>
-                <span>Track Seats</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= categories_path %>">
-                <i class="fa fa-newspaper-o"></i>
-                <span>Dish Categories</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= dishes_path %>">
-                <i class="fa fa-cutlery"></i>
-                <span>Dishes</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= menus_path %>">
-                <i class="fa fa-list-alt"></i>
-                <span>Menus</span>
-              </a>
-            <li>
-              <a href="<%= meals_path %>">
-                <i class="fa fa-calendar"></i>
-                <span>Meals</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= shifts_path %>">
-                <i class="fa fa-clock-o"></i>
-                <span>Shifts</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= seating_chart_categories_path %>">
-                <i class="fa fa-newspaper-o"></i>
-                <span>Seating Chart Categories</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= tables_path %>">
-                <i class="fa fa-circle-o"></i>
-                <span>Tables</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class="fa fa-bar-chart-o"></i>
-                <span>Reports</span>
-              </a>
-            </li>
-            <li>
-              <a href="<%= comments_path %>">
-                <i class="fa fa-comment-o"></i>
-                <span>Comments</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <%= render 'layouts/messages' %>
-          <%= yield %>
+      <div class="box">
+        <div class="row row-offcanvas row-offcanvas-left">
+          <div class="col-sm-4 col-md-2 sidebar">
+            <ul class="nav nav-sidebar sidebar-menu sidebar-offcanvas">
+              <li>
+                <a href="<%= root_path %>">
+                  <i class="fa fa-cog"></i>
+                  <span>Dashboard</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= users_path %>">
+                  <i class="fa fa-users"></i>
+                  <span>Users</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= meal_logs_path %>">
+                  <i class="fa fa-coffee"></i>
+                  <span>Track Seats</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= categories_path %>">
+                  <i class="fa fa-newspaper-o"></i>
+                  <span>Dish Categories</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= dishes_path %>">
+                  <i class="fa fa-cutlery"></i>
+                  <span>Dishes</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= menus_path %>">
+                  <i class="fa fa-list-alt"></i>
+                  <span>Menus</span>
+                </a>
+              <li>
+                <a href="<%= meals_path %>">
+                  <i class="fa fa-calendar"></i>
+                  <span>Meals</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= shifts_path %>">
+                  <i class="fa fa-clock-o"></i>
+                  <span>Shifts</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= seating_chart_categories_path %>">
+                  <i class="fa fa-newspaper-o"></i>
+                  <span>Seating Chart Categories</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= tables_path %>">
+                  <i class="fa fa-circle-o"></i>
+                  <span>Tables</span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <i class="fa fa-bar-chart-o"></i>
+                  <span>Reports</span>
+                </a>
+              </li>
+              <li>
+                <a href="<%= comments_path %>">
+                  <i class="fa fa-comment-o"></i>
+                  <span>Comments</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-8 col-sm-offset-4 col-md-10 col-md-offset-2 main">
+            <%= render 'layouts/messages' %>
+            <%= yield %>
+          </div>
         </div>
       </div>
     </div>

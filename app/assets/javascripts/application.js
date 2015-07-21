@@ -25,7 +25,11 @@
 // for close button in the notification message
 //= require bootstrap
 
-$(document).ready(function(){
+$(document).on("ready page:load", function(){
+  $('[data-toggle="offcanvas"]').click(function () {
+    $('.row-offcanvas').toggleClass('active')
+  });
+
   // disable auto discover
   Dropzone.autoDiscover = false;
 
