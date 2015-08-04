@@ -42,7 +42,7 @@ gem 'ckeditor', '~> 4.1.1'
 
 gem 'bootstrap-sass', '~> 3.3.1'
 
-gem 'font-awesome-rails', '~>4.3.0.0'
+gem 'font-awesome-rails', '~>4.4.0.0'
 # Use with Bootstrap to add browser vendor prefixes automatically
 gem 'autoprefixer-rails'
 
