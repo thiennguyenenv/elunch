@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :notes
+
   resources :meal_logs
 
   resources :pictures
