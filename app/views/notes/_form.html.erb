@@ -1,33 +1,44 @@
-<%= form_for(@note) do |f| %>
-  <% if @note.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@note.errors.count, "error") %> prohibited this note from being saved:</h2>
+<div class="panel-flat">
+  <div class="header">
+    <h3><%= if @note.new_record? then "Create Note" else "Update Note" end %></h3>
+  </div>
+  <div class="content">
+    <%= form_for(@note, html: { class: "form-horizontal" }) do |f| %>
+      <%= error_messages @note %>
 
-      <ul>
-      <% @note.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+      <div class="form-group">
+        <%= f.label :name, class: "col-sm-3 control-label" %><br>
+        <div class="col-sm-9">
+          <%= f.text_field :name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :description, class: "col-sm-3 control-label" %><br>
+        <div class="col-sm-9">
+          <%= f.text_field :description, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :group_id, class: "col-sm-3 control-label" %><br>
+        <div class="col-sm-9">
+          <%= f.text_field :group_id, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :reset_option, class: "col-sm-3 control-label" %><br>
+        <div class="col-sm-9">
+          <%= f.check_box :reset_option %>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-3">
+          <% if @note.new_record? %>
+            <%= f.submit "Create", class: "btn btn-success" %>
+          <% else %>
+            <%= f.submit "Update", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :group_id %><br>
-    <%= f.text_field :group_id %>
-  </div>
-  <div class="field">
-    <%= f.label :reset_option %><br>
-    <%= f.check_box :reset_option %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

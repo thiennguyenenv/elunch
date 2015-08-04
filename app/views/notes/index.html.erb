@@ -1,33 +1,37 @@
-<p id="notice"><%= notice %></p>
+<div class="panel-flat">
+  <div class="header">
+    <h3>Notes</h3>
+  </div>
+  <div class="content">
+    <div class="row">
+      <%= link_to 'New Note', new_note_path, class: "btn btn-primary" %>
+    </div>
+    <div class="row">
+      <table class="table table-bordered table-hover table-stripped">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Group</th>
+            <th>Reset option</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-<h1>Listing Notes</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Group</th>
-      <th>Reset option</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @notes.each do |note| %>
-      <tr>
-        <td><%= note.name %></td>
-        <td><%= note.description %></td>
-        <td><%= note.group_id %></td>
-        <td><%= note.reset_option %></td>
-        <td><%= link_to 'Show', note %></td>
-        <td><%= link_to 'Edit', edit_note_path(note) %></td>
-        <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Note', new_note_path %>
+        <tbody>
+          <% @notes.each do |note| %>
+            <tr>
+              <td><%= note.name %></td>
+              <td><%= note.description %></td>
+              <td><%= note.group_id %></td>
+              <td><%= note.reset_option %></td>
+              <td><%= link_to 'Show', note %></td>
+              <td><%= link_to 'Edit', edit_note_path(note) %></td>
+              <td><%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 class NotesController < ApplicationController
+  layout :determine_layout
   before_action :set_note, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
