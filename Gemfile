@@ -85,7 +85,7 @@ gem 'dropzonejs-rails', '~> 0.7.1'
 gem 'acts_as_commentable', '~> 4.0.2'
 
 # Support soft-delete
-gem 'acts_as_paranoid', '~> 0.3.1'
+gem "paranoia", "~> 2.0"
 
 group :development, :test do
   gem 'pry', '~> 0.10.1'
