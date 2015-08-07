@@ -39,8 +39,10 @@ Rails.application.routes.draw do
     get "users/crop", to: "users/registrations#crop"
     get "users/choose-table", to: "users/registrations#choose_table"
     get "users/choose-vegan-table", to: "users/registrations#choose_vegan_table"
+    get "users/note/new", to: "notes#new_note"
     put "users/join-table", to: "users/registrations#join_table"
     put "users/leave-table", to: "users/registrations#leave_table"
+    put "users/note", to: "notes#add_note"
   end
 
   get "view-table/:id", to: "tables#view_table"
